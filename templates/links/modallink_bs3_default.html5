@@ -1,0 +1,1 @@
+<a href="<?= $this->href; ?>" title="<?= $this->linkTitle; ?>"<?= $this->target; ?><?= $this->linkAttributes; ?>><?= $this->link; ?></a>
