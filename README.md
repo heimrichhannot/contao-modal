@@ -15,15 +15,16 @@ By default it comes with Bootstrap 3 modal support.
 
  Insert-Tag | Description
  ---------- | ----------
- '{{modal_url::*::*::*}}' | This link will be replaced with the modal url '<a href="{{modal_url::1::home}}">Hier klicken</a>'. Replace arguments: (1st - modal alias or id, 2nd - page alias or id where jump to, 3rd - link text & title)
- '{{modal_link::*::*}}' | This link will be replaced with the modal link. Arguments: (1st - modal alias or id, 2nd - page alias or id where jump to)
- '{{modal_link_open::*::*}}' | This link will be replaced with the modal link opening tag '<a href="{{modal_url::1::home}}">'. Add your custom text next. Arguments: (1st - modal alias or id, 2nd - page alias or id where jump to)
- '{{modal_link_close::*}}' | This link will be replaced with the modal link closing tag '</a>'. Requires associated {{modal_link_open}} tag.
+`{{modal_url::*::*::*}}` | This link will be replaced with the modal url `<a href="{{modal_url::1::home}}">Hier klicken</a>`. Replace arguments: (1st - modal alias or id, 2nd - page alias or id where jump to, 3rd - link text & title)
+`{{modal_link::*::*}}` | This link will be replaced with the modal link. Arguments: (1st - modal alias or id, 2nd - page alias or id where jump to)
+`{{modal_link_open::*::*}}` | This link will be replaced with the modal link opening tag `<a href="{{modal_url::1::home}}">`. Add your custom text next. Arguments: (1st - modal alias or id, 2nd - page alias or id where jump to)
+`{{modal_link_close::*}}` | This link will be replaced with the modal link closing tag `</a>`. Requires associated {{modal_link_open}} tag.
  
  
 ### Hooks
 
 Name | Arguments | Expected return value | Description
+ ---------- | ---------- | ---------- | ---------
 generateModalUrl | $arrRow, $strParams, $strUrl | $strUrl | Modify the modal url.
 generateModal | $objTemplate, $objModel, $objConfig, $objModal | void | Modify the modal output.
 
