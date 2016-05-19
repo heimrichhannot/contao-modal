@@ -200,7 +200,7 @@ class ModalController extends \Controller
 
 		if(\Environment::get('isAjaxRequest'))
 		{
-			die($strBuffer);
+			die($this->replaceInsertTags($strBuffer));
 		}
 		else
 		{
