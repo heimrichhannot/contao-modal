@@ -40,11 +40,12 @@ class Teaser extends ModalController
 		}
 
 		$arrConfig = static::getModalConfig($objModal);
-
-		$objElement->setHref(ModalController::generateModalUrl($objModal->row(), $objElement->jumpTo));
+		
+		$blnAjax = true;
+		$objElement->setHref(ModalController::generateModalUrl($objModal->row(), $objElement->jumpTo, $blnAjax));
 		$objElement->setTitle($objModal->title);
 
-		if(is_array($arrConfig['link']['attributes']))
+		if($blnAjax && is_array($arrConfig['link']['attributes']))
 		{
 			$objElement->setLinkAttributes($arrConfig['link']['attributes']);
 		}

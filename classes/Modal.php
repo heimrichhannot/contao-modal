@@ -13,6 +13,8 @@ namespace HeimrichHannot\Modal;
 
 class Modal extends \Frontend
 {
+	const MODAL_NAME = 'modal';
+	
 	protected $objModel;
 
 	protected $objConfig;

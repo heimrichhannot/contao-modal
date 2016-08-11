@@ -10,6 +10,7 @@ By default it comes with Bootstrap 3 modal support.
 - custom header/footer
 - content elements within modal body
 - inserttags
+- works together with `contao-disclaimer`
 
 ### Insertags
 
@@ -131,13 +132,36 @@ The modal windows are delivered asynchronous by the ModalController. You have to
                 }
 
                 $.ajax({
-                    url: url
-                }).done(function (data) {
-                    var $modal = $(data);
-                    $('body').find('.modal').remove();
-                    $modal.appendTo('body').modal('show');
-                    history.pushState(null, null, url);
-                })
+                    url: url,
+                    dataType: 'json',
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        if (jqXHR.status == 301) {
+                            location.href = jqXHR.responseJSON.result.data.url;
+                            closeModal(jqXHR.responseJSON, $form);
+                            return;
+                        }
+                    },
+                    success: function (response, textStatus, jqXHR) {
+
+                        if (typeof response == 'undefined') {
+                            return;
+                        }
+
+                        if (response.result.html && response.result.data.id) {
+                            var $modal = $(response.result.html);
+                            $('body').find('.modal').remove();
+                            $modal.appendTo('body').modal('show');
+
+                            if(typeof response.result.data.url !== 'undefined')
+                            {
+                                history.pushState(null, null, response.result.data.url);
+                            }
+                        }
+                    }
+                });
+
+                return false;
+
             });
         },
         bindClose: function () {
@@ -158,6 +182,7 @@ The modal windows are delivered asynchronous by the ModalController. You have to
                 });
 
                 history.pushState(null, null, $this.data('back'));
+                // window.location.replace($this.data('back'));
             });
         }
     }

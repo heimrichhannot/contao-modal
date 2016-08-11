@@ -17,23 +17,46 @@ $GLOBALS['TL_PERMISSIONS'][] = 'modalp';
 /**
  * Hooks
  */
-$GLOBALS['TL_HOOKS']['getContentSourceOptions'][]  = array('HeimrichHannot\\Modal\\Backend\\Content', 'addSourceOptions');
-$GLOBALS['TL_HOOKS']['generateTeaserLink'][]       = array('HeimrichHannot\\Modal\\Elements\\Teaser', 'generateModalTeaserLink');
-$GLOBALS['TL_HOOKS']['generatePage'][]             = array('HeimrichHannot\\Modal\\ModalController', 'generatePageWithModal');
-$GLOBALS['TL_HOOKS']['replaceDynamicScriptTags'][] = array('HeimrichHannot\\Modal\\ModalController', 'hookReplaceDynamicScriptTags');
-$GLOBALS['TL_HOOKS']['replaceInsertTags'][]        = array('HeimrichHannot\\Modal\\ModalController', 'replaceModalInsertTags');
+$GLOBALS['TL_HOOKS']['getContentSourceOptions'][]    = array('HeimrichHannot\Modal\Backend\Content', 'addSourceOptions');
+$GLOBALS['TL_HOOKS']['getDisclaimerSourceOptions'][] = array('HeimrichHannot\Modal\Backend\Disclaimer', 'addSourceOptions');
+$GLOBALS['TL_HOOKS']['showDisclaimer'][]             = array('HeimrichHannot\Modal\Hooks', 'showDisclaimerHook');
+$GLOBALS['TL_HOOKS']['generateTeaserLink'][]         = array('HeimrichHannot\Modal\Elements\Teaser', 'generateModalTeaserLink');
+$GLOBALS['TL_HOOKS']['getPageLayout'][]              = array('HeimrichHannot\Modal\ModalController', 'setModalAutoItem');
+$GLOBALS['TL_HOOKS']['generatePage'][]               = array('HeimrichHannot\Modal\ModalController', 'generatePageWithModal');
+$GLOBALS['TL_HOOKS']['replaceDynamicScriptTags'][]   = array('HeimrichHannot\Modal\ModalController', 'hookReplaceDynamicScriptTags');
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][]          = array('HeimrichHannot\Modal\ModalController', 'replaceModalInsertTags');
 
 /**
  * Models
  */
-$GLOBALS['TL_MODELS']['tl_modal']         = 'HeimrichHannot\\Modal\\ModalModel';
-$GLOBALS['TL_MODELS']['tl_modal_archive'] = 'HeimrichHannot\\Modal\\ModalArchiveModel';
+$GLOBALS['TL_MODELS']['tl_modal']         = 'HeimrichHannot\Modal\ModalModel';
+$GLOBALS['TL_MODELS']['tl_modal_archive'] = 'HeimrichHannot\Modal\ModalArchiveModel';
 
 
 /**
  * Register the auto_item keywords
  */
 $GLOBALS['TL_AUTO_ITEM'][] = 'modals';
+
+/**
+ * Ajax Actions
+ */
+$GLOBALS['AJAX'][\HeimrichHannot\Modal\Modal::MODAL_NAME] = array
+(
+	'actions' => array
+	(
+		'show'  => array
+		(
+			'arguments' => array(),
+			'optional'   => array(),
+		),
+		'redirect'  => array
+		(
+			'arguments' => array(),
+			'optional'   => array(),
+		),
+	),
+);
 
 /**
  * Modal types
@@ -52,4 +75,22 @@ $GLOBALS['TL_MODALS']['bs3_default'] = array
 	(
 		'system/modules/modal/assets/js/jquery.modal.bs3.js',
 	),
+);
+
+$GLOBALS['TL_MODALS']['bs3_lg'] = array_merge
+(
+	$GLOBALS['TL_MODALS']['bs3_default'],
+	array
+	(
+		'template' => 'modal_bs3_lg'
+	)
+);
+
+$GLOBALS['TL_MODALS']['bs3_sm'] = array_merge
+(
+	$GLOBALS['TL_MODALS']['bs3_default'],
+	array
+	(
+		'template' => 'modal_bs3_sm'
+	)
 );

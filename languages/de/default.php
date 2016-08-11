@@ -12,3 +12,5 @@
  * References
  */
 $GLOBALS['TL_LANG']['modals']['bs3_default'] = 'Bootstrap 3 (Standard)';
+$GLOBALS['TL_LANG']['modals']['bs3_lg'] = 'Bootstrap 3 (Large)';
+$GLOBALS['TL_LANG']['modals']['bs3_sm'] = 'Bootstrap 3 (Small)';

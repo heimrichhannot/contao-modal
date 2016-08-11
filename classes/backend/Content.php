@@ -72,7 +72,7 @@ class Content extends \Backend
 			return $arrOptions;
 		}
 
-		// Add the "external" option
+		// Add the "modal" option
 		if ($this->User->hasAccess('tl_content::modal', 'alexf'))
 		{
 			$arrOptions[] = 'modal';

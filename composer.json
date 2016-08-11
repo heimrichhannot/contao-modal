@@ -20,6 +20,7 @@
 		"contao/core": ">=3.4,<4-dev",
 		"contao-community-alliance/composer-installer": "*",
 		"heimrichhannot/contao-teaser": "~1.0",
+		"heimrichhannot/contao-ajax": "~1.0",
 		"heimrichhannot/contao-haste_plus": "~1.0"
 	},
 	"autoload": {
