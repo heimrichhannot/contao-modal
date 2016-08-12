@@ -10,7 +10,7 @@
 
 $arrDca = &$GLOBALS['TL_DCA']['tl_disclaimer'];
 
-$arrDca['config']['onload_callback'][] = array('HeimrichHannot\Modal\Backend\Disclaimer', 'modifyPalette');
+$arrDca['config']['onload_callback'][] = array('HeimrichHannot\Modal\Backend\DisclaimerBackend', 'modifyPalette');
 
 /**
  * Subpalettes
@@ -29,7 +29,7 @@ $arrFields = array
 		'search'           => true,
 		'inputType'        => 'select',
 		'foreignKey'       => 'tl_modal.title',
-		'options_callback' => array('HeimrichHannot\Modal\Backend\Disclaimer', 'getModalOptions'),
+		'options_callback' => array('HeimrichHannot\Modal\Backend\DisclaimerBackend', 'getModalOptions'),
 		'eval'             => array('tl_class' => 'w50 clr', 'mandatory' => true, 'includeBlankOption' => true, 'chosen' => true),
 		'sql'              => "int(10) unsigned NOT NULL default '0'",
 		'relation'         => array('type' => 'belongsTo', 'load' => 'lazy'),

@@ -28,7 +28,62 @@ Name | Arguments | Expected return value | Description
  ---------- | ---------- | ---------- | ---------
 generateModalUrl | $arrRow, $strParams, $strUrl | $strUrl | Modify the modal url.
 generateModal | $objTemplate, $objModel, $objConfig, $objModal | void | Modify the modal output.
+getModalContentElement / $strContent, $objElement, $objTemplate, $objModel, $objConfig, $objModal / $strContent / Modify the modal within content element.
 
+### Register custom modules to make usage of modal
+
+If you want to register you list modules for example to make usage of the modal framework, you should enable by adding your module to the `$GLOBALS['MODAL_MODULES']`
+
+```
+config.php
+/**
+ * Modal module configuration
+ */
+$GLOBALS['MODAL_MODULES']['mymodule_list'] = array
+(
+	'invokePalette' => 'customTpl;', // The modal palette will be invoked after the field customTpl; as example
+);
+```
+
+Than you have to implement the links within you list module. The following example is taken from the newslist implementation within the modal framework:
+
+```
+ public function parseArticlesHook(&$objTemplate, $arrArticle, $objModule)
+ 	{
+ 		if (!$objModule->useModal || $arrArticle['source'] != 'default') {
+ 			return false;
+ 		}
+ 		
+ 		$objJumpTo = \PageModel::findPublishedById($objTemplate->archive->jumpTo);
+ 		
+ 		if ($objJumpTo === null || !$objJumpTo->linkModal) {
+ 			return false;
+ 		}
+ 		
+ 		$objModal = ModalModel::findPublishedByIdOrAlias($objJumpTo->modal);
+ 		
+ 		if ($objModal === null) {
+ 			return false;
+ 		}
+ 		
+ 		$objJumpTo = \PageModel::findWithDetails($objJumpTo->id);
+ 		
+ 		$arrConfig = ModalController::getModalConfig($objModal->current(), $objJumpTo->layout);
+ 		
+ 		$blnAjax = true;
+ 		$blnRedirect = true;
+ 		
+ 		$objTemplate->link         = ModalController::generateModalUrl($arrArticle, $objTemplate->archive->jumpTo, $blnAjax, $blnRedirect);
+ 		$objTemplate->linkHeadline = ModalController::convertLinkToModalLink($objTemplate->linkHeadline, $objTemplate->link, $arrConfig, $blnRedirect);
+ 		$objTemplate->more         = ModalController::convertLinkToModalLink($objTemplate->more, $objTemplate->link, $arrConfig, $blnRedirect);
+ 	}
+```
+
+As you can see, we attach to the parseArticles HOOK and adjust all links with `ModalController::generateModalUrl()` or `ModalController::convertLinkToModalLink()` functions.
+
+**To access the Reader entities it is necessary to link the redirect page with a modal. Add a new modal first, attach the reader modules as content element and select "link Modal" within the redirect page in the site structure and assign the previously created modal to the page.**
+
+ 
 ### Add custom modal framework
 
 To extend modal with your own framework, you have add the following:

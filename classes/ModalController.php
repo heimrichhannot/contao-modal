@@ -11,6 +11,7 @@
 namespace HeimrichHannot\Modal;
 
 
+use Contao\PageModel;
 use HeimrichHannot\Ajax\Ajax;
 use HeimrichHannot\Ajax\AjaxAction;
 
@@ -140,8 +141,19 @@ class ModalController extends \Controller
 			\Input::setGet('modals', \Input::get('auto_item'));
 		}
 		
+		$blnForwardAutoItem = false;
+		$objModal           = ModalModel::findPublishedByIdOrAliasWithoutLinkedPage(\Input::get('modals'));
+		
+		if ($objModal === null && $objPage->linkModal) {
+			$objModal = ModalModel::findPublishedByIdOrAlias($objPage->modal);
+			
+			if ($objModal !== null) {
+				$blnForwardAutoItem = true;
+			}
+		}
+		
 		// if modal was not found by alias, unset the $_GET Parameter
-		if (($objModal = ModalModel::findPublishedByIdOrAlias(\Input::get('modals'))) === null) {
+		if ($objModal === null) {
 			unset($_GET['modals']);
 			
 			return false;
@@ -153,7 +165,9 @@ class ModalController extends \Controller
 		Ajax::runActiveAction(Modal::MODAL_NAME, 'show', new ModalAjax($objModal->current(), $arrConfig));
 		
 		// if modal not found by alias, unset auto_item $_GET Parameter as other modules may look for it
-		unset($_GET['auto_item']);
+		if (!$blnForwardAutoItem) {
+			unset($_GET['auto_item']);
+		}
 		
 		return true;
 	}
@@ -181,7 +195,12 @@ class ModalController extends \Controller
 			return;
 		}
 		
-		$objModel = ModalModel::findPublishedByIdOrAlias(\Input::get('modals'));
+		$objModel = ModalModel::findPublishedByIdOrAliasWithoutLinkedPage(\Input::get('modals'));
+		
+		if ($objModel === null && $objPage->linkModal) {
+			$objModel = ModalModel::findPublishedByIdOrAlias($objPage->modal);
+		}
+		
 		$blnCheck = true;
 		
 		if ($objModel === null) {
@@ -285,13 +304,13 @@ class ModalController extends \Controller
 	/**
 	 * Generate an modal URL depending on the current rewriteURL setting
 	 *
-	 * @param array $arrRow An array of modal parameters
-	 * @param mixed $jumpTo An optional jumpTo Page
+	 * @param array   $arrRow  An array of modal parameters
+	 * @param mixed   $jumpTo  An optional jumpTo Page
 	 * @param boolean $blnAjax Determine if ajax request, can be overwritten
 	 *
 	 * @return string An URL that can be used in the front end
 	 */
-	public static function generateModalUrl(array $arrRow, $jumpTo = null, &$blnAjax = true)
+	public static function generateModalUrl(array $arrRow = array(), $jumpTo = null, &$blnAjax = true, &$blnRedirect = true)
 	{
 		global $objPage;
 		$strUrl    = '';
@@ -300,21 +319,21 @@ class ModalController extends \Controller
 		
 		if ($jumpTo !== null && ($objJumpTo = \PageModel::findPublishedByIdOrAlias($jumpTo)) !== null)
 		{
-			$strUrl = $objJumpTo->current()->getFrontendUrl($strParams);
-		}
-		else if ($objPage !== null)
-		{
-			$strUrl = $objPage->getFrontendUrl($strParams);
-		}
-
-		if($blnAjax)
-		{
-			// trigger ajax action if jumpto is same page
-			if($objJumpTo === null && $objPage->id != $objJumpTo->id)
-			{
-				$strUrl = AjaxAction::generateUrl(Modal::MODAL_NAME, 'show', array(), false, $strUrl);
+			$objJumpTo = $objJumpTo->current();
+			$strUrl    = $objJumpTo->getFrontendUrl($strParams);
+		} else {
+			if ($objPage !== null) {
+				$strUrl = $objPage->getFrontendUrl($strParams);
 			}
-			// force redirect to new page and set ajax to false
+		}
+		
+		if ($blnAjax) {
+			// trigger ajax action if jumpto is same page
+			if ($objJumpTo === null || $objPage->id == $objJumpTo->id)
+			{
+				$blnRedirect = false;
+				$strUrl = AjaxAction::generateUrl(Modal::MODAL_NAME, 'show', array(), false, $strUrl);
+			} // force redirect to new page and set ajax to false
 			else
 			{
 				$blnAjax = false;
@@ -329,6 +348,50 @@ class ModalController extends \Controller
 		}
 		
 		return $strUrl;
+	}
+	
+	/**
+	 * Convert a anchor to a modal link by given configuration
+	 *
+	 * @param string $strLink   The anchor link as string
+	 * @param string $strUrl The modal link from ModalController::generateModalUrl()
+	 * @param array  $arrConfig The modal configuration
+	 * @param boolean $blnRedirect Is redirect to other page
+	 *
+	 * @return string The converted modal link or the link if pattern did not match
+	 */
+	public static function convertLinkToModalLink($strLink, $strUrl, array $arrConfig = array(), $blnRedirect)
+	{
+		$strSearch  = '/<a(.*?)href="(?P<href>.*?)"(?P<attributes>.*?)>(?P<content>.*)/s';
+		
+		preg_match($strSearch, $strLink, $arrMatches);
+		
+		if(!isset($arrMatches['href']))
+		{
+			return $strLink;
+		}
+		
+		$strAttribues = $arrMatches['attributes'];
+		$arrAttributes = array();
+		
+		if(is_array($arrConfig['link']['attributes']) && !$blnRedirect)
+		{
+			foreach ($arrConfig['link']['attributes'] as $key => $value)
+			{
+				$arrAttributes[] = $key . '="' . $value .'"';
+			}
+			
+			$strAttribues = ($strAttribues ? $strAttribues . ' ' : '') . implode(' ', $arrAttributes);
+		}
+		
+		$strLink = sprintf('<a href="%s"%s>%s',
+						   $strUrl,
+						   $strAttribues,
+						   $arrMatches['content']
+		);
+		
+		
+		return $strLink;
 	}
 	
 	/**

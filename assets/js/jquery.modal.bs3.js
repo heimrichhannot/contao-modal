@@ -4,10 +4,11 @@
         init: function () {
             this.bindToggle();
             this.bindClose();
+            this.bindPopState();
             $(document).ajaxComplete($.proxy(this.ajaxComplete, this));
         },
         ajaxComplete: function () {
-            this.bindClose();
+            this.bindClose(true);
         },
         bindToggle: function () {
             $('[data-toggle=modal]').on('click', function () {
@@ -36,12 +37,12 @@
 
                         if (response.result.html && response.result.data.id) {
                             var $modal = $(response.result.html);
-                            $('body').find('.modal').remove();
+                            $('body').find('.bs-modal').remove();
                             $modal.appendTo('body').modal('show');
 
                             if(typeof response.result.data.url !== 'undefined')
                             {
-                                history.pushState(null, null, response.result.data.url);
+                                history.pushState({}, null, response.result.data.url);
                             }
                         }
                     }
@@ -51,8 +52,8 @@
 
             });
         },
-        bindClose: function () {
-            $('.modal').on('hide.bs.modal', function (e) {
+        bindClose: function (isAjax) {
+            $('.bs-modal').on('hide.bs.modal', function (e) {
                 var $this = $(this);
 
                 // stop embedded videos like youtube
@@ -68,8 +69,13 @@
                     this.pause();
                 });
 
-                history.pushState(null, null, $this.data('back'));
-                // window.location.replace($this.data('back'));
+                history.pushState({}, null, $this.data('back'));
+            });
+        },
+        bindPopState : function(){
+            // If a pushstate has previously happened and the back button is clicked, hide any modals.
+            $(window).on('popstate', function() {
+                $('.bs-modal').modal('hide');
             });
         }
     }

@@ -1,4 +1,4 @@
-<div class="modal fade in" tabindex="-1" role="dialog" data-back="<?= $this->back; ?>">
+<div class="bs-modal modal fade in" tabindex="-1" role="dialog" data-back="<?= $this->back; ?>">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<?php if ($this->showHeader): ?>
@@ -8,9 +8,11 @@
 					<?php elseif($this->headline): ?>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<<?= $this->hl ?> class="modal-title"><?= $this->headline ?></<?= $this->hl ?>>
-					<?php else :?>
+						<?php elseif($this->usePageTitle): ?>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">{{page::pageTitle}}</h4>
+						<?php else: ?>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title"><?= $this->title; ?></h4>
 					<?php endif; ?>
 				</div>
 			<?php endif; ?>

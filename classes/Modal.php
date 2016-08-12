@@ -43,8 +43,12 @@ class Modal extends \Frontend
 
 	public function generate()
 	{
+		global $objPage;
+		
 		$this->Template = new \FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
+		
+		$this->Template->title = ''; // title should be empty by default, use headline or pageTitle instead
 
 		$arrClasses = array();
 
@@ -52,7 +56,7 @@ class Modal extends \Frontend
 		{
 			$arrClasses[] = $this->objConfig->activeClass;
 		}
-
+		
 		if ($this->Template->headline == '')
 		{
 			$this->Template->headline = $this->headline;
@@ -65,6 +69,7 @@ class Modal extends \Frontend
 
 		$this->Template->class = implode(' ', $arrClasses);
 		$this->Template->back = $this->getBackLink();
+		$this->Template->redirectBack = $this->getRedirectBack();
 
 		$this->compile();
 
@@ -77,7 +82,7 @@ class Modal extends \Frontend
 			}
 		}
 
-		return $this->Template->parse();
+		return \Controller::replaceInsertTags($this->Template->parse());
 	}
 
 	protected function compile()
@@ -98,7 +103,18 @@ class Modal extends \Frontend
 			{
 				while ($objElement->next())
 				{
-					$strText .= $this->getContentElement($objElement->current());
+					$strContent = $this->getContentElement($objElement->current());
+					
+					// HOOK: add custom logic
+					if (isset($GLOBALS['TL_HOOKS']['getModalContentElement']) && is_array($GLOBALS['TL_HOOKS']['getModalContentElement']))
+					{
+						foreach ($GLOBALS['TL_HOOKS']['getModalContentElement'] as $callback)
+						{
+							$strContent = static::importStatic($callback[0])->{$callback[1]}($objElement->current(), $strContent, $this->Template, $this->objModel, $this->objConfig, $this);
+						}
+					}
+					
+					$strText .= $strContent;
 				}
 			}
 
@@ -163,6 +179,11 @@ class Modal extends \Frontend
 	public function getBackLink()
 	{
 		return $this->backLink;
+	}
+	
+	public function getRedirectBack()
+	{
+		
 	}
 
 }

@@ -7,7 +7,8 @@ $arrLang = &$GLOBALS['TL_LANG']['tl_modal'];
  */
 $arrLang['title'] = array('Titel', 'Geben Sie hier bitte den Titel ein.');
 $arrLang['alias'] = array('Modalalias', 'Der Modalalias ist eine eindeutige Referenz, die anstelle der numerischen Modal-ID aufgerufen werden kann.');
-$arrLang['headline'] = array('Überschrift', 'Fügen Sie dem Modal eine individuelle Überschrift hinzu.');
+$arrLang['headline'] = array('Überschrift', 'Fügen Sie dem Modal eine individuelle Überschrift hinzu, der Seitentitel würd dann überschrieben.');
+$arrLang['usePageTitle'] = array('Titel von Seitentitel setzen', 'Lassen Sie den Titel des Modal durch den Seitentitel überschreiben (pageTitle). Überschreibt die Überschrift.');
 $arrLang['customHeader'] = array('Kopfzeile überschreiben', 'Überschreiben Sie die Kopfzeile, der Titel wird dann nicht mehr verwendet.');
 $arrLang['header'] = array('Kopfzeile', 'Geben Sie den Inhalt der Kopfzeile an.');
 $arrLang['addFooter'] = array('Fußzeile hinzufügen', 'Fügen Sie eine individuelle Fußzeile hinzu.');

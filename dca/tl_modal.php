@@ -95,7 +95,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = array
 	'palettes'    => array
 	(
 		'__selector__' => array('customModal', 'customHeader', 'addFooter', 'published'),
-		'default'      => '{general_legend},title,alias;{header_legend},headline,customHeader;{footer_legend},addFooter;{expert_legend},customModal;{publish_legend},published;',
+		'default'      => '{general_legend},title,alias;{header_legend},headline,usePageTitle,customHeader;{footer_legend},addFooter;{expert_legend},customModal;{publish_legend},published;',
 	),
 	'subpalettes' => array
 	(
@@ -140,6 +140,14 @@ $GLOBALS['TL_DCA']['tl_modal'] = array
 			'eval'      => array('mandatory' => true, 'tl_class' => 'w50'),
 			'sql'       => "varchar(255) NOT NULL default ''",
 		),
+		'usePageTitle' => array
+		(
+			'label'     => &$GLOBALS['TL_LANG']['tl_modal']['usePageTitle'],
+			'exclude'   => true,
+			'filter'    => true,
+			'inputType' => 'checkbox',
+			'sql'       => "char(1) NOT NULL default ''",
+		),
 		'alias'        => array
 		(
 			'label'         => &$GLOBALS['TL_LANG']['tl_modal']['alias'],
@@ -179,7 +187,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = array
 			'search'    => true,
 			'inputType' => 'inputUnit',
 			'options'   => array('h1', 'h2', 'h3', 'h4', 'h5', 'h6'),
-			'eval'      => array('maxlength' => 200),
+			'eval'      => array('maxlength' => 200, 'tl_class' => 'w50'),
 			'sql'       => "varchar(255) NOT NULL default ''",
 		),
 		'customHeader' => array
@@ -188,7 +196,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = array
 			'exclude'   => true,
 			'filter'    => true,
 			'inputType' => 'checkbox',
-			'eval'      => array('submitOnChange' => true),
+			'eval'      => array('submitOnChange' => true, 'tl_class' => 'clr'),
 			'sql'       => "char(1) NOT NULL default ''",
 		),
 		'header'       => array

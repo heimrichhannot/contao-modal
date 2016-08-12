@@ -24,19 +24,22 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Models
-	'HeimrichHannot\Modal\ModalModel'         => 'system/modules/modal/models/ModalModel.php',
-	'HeimrichHannot\Modal\ModalArchiveModel'  => 'system/modules/modal/models/ModalArchiveModel.php',
+	'HeimrichHannot\Modal\PageModel'                 => 'system/modules/modal/models/PageModel.php',
+	'HeimrichHannot\Modal\ModalModel'                => 'system/modules/modal/models/ModalModel.php',
+	'HeimrichHannot\Modal\ModalArchiveModel'         => 'system/modules/modal/models/ModalArchiveModel.php',
 
 	// Classes
-	'HeimrichHannot\Modal\Modal'              => 'system/modules/modal/classes/Modal.php',
-	'HeimrichHannot\Modal\ModalAjax'          => 'system/modules/modal/classes/ModalAjax.php',
-	'HeimrichHannot\Modal\ModalLink'          => 'system/modules/modal/classes/ModalLink.php',
-	'HeimrichHannot\Modal\ModalController'    => 'system/modules/modal/classes/ModalController.php',
-	'HeimrichHannot\Modal\Hooks'              => 'system/modules/modal/classes/Hooks.php',
-	'HeimrichHannot\Modal\Backend\Layout'     => 'system/modules/modal/classes/backend/Layout.php',
-	'HeimrichHannot\Modal\Backend\Content'    => 'system/modules/modal/classes/backend/Content.php',
-	'HeimrichHannot\Modal\Backend\Disclaimer' => 'system/modules/modal/classes/backend/Disclaimer.php',
-	'HeimrichHannot\Modal\Elements\Teaser'    => 'system/modules/modal/classes/elements/Teaser.php',
+	'HeimrichHannot\Modal\Modal'                     => 'system/modules/modal/classes/Modal.php',
+	'HeimrichHannot\Modal\ModalAjax'                 => 'system/modules/modal/classes/ModalAjax.php',
+	'HeimrichHannot\Modal\ModalLink'                 => 'system/modules/modal/classes/ModalLink.php',
+	'HeimrichHannot\Modal\ModalController'           => 'system/modules/modal/classes/ModalController.php',
+	'HeimrichHannot\Modal\Hooks'                     => 'system/modules/modal/classes/Hooks.php',
+	'HeimrichHannot\Modal\Backend\LayoutBackend'     => 'system/modules/modal/classes/backend/LayoutBackend.php',
+	'HeimrichHannot\Modal\Backend\ContentBackend'    => 'system/modules/modal/classes/backend/ContentBackend.php',
+	'HeimrichHannot\Modal\Backend\ModuleBackend'     => 'system/modules/modal/classes/backend/ModuleBackend.php',
+	'HeimrichHannot\Modal\Backend\DisclaimerBackend' => 'system/modules/modal/classes/backend/DisclaimerBackend.php',
+	'HeimrichHannot\Modal\Backend\PageBackend'       => 'system/modules/modal/classes/backend/PageBackend.php',
+	'HeimrichHannot\Modal\Elements\Teaser'           => 'system/modules/modal/classes/elements/Teaser.php',
 ));
 
 

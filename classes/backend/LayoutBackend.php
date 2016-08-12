@@ -13,7 +13,7 @@ namespace HeimrichHannot\Modal\Backend;
 
 use HeimrichHannot\Modal\ModalController;
 
-class Layout extends \Backend
+class LayoutBackend extends \Backend
 {
 
 	public function getModalOptions()

@@ -14,7 +14,7 @@ namespace HeimrichHannot\Modal\Backend;
 use HeimrichHannot\Disclaimer\DisclaimerModel;
 use HeimrichHannot\Modal\ModalModel;
 
-class Disclaimer extends \Backend
+class DisclaimerBackend extends \Backend
 {
 	
 	public function modifyPalette(\DataContainer $dc)
