@@ -159,11 +159,6 @@ class ModalController extends \Controller
 			return false;
 		}
 		
-		$arrConfig = static::getModalConfig($objModal->current(), $objLayout, $objPage);
-		
-		Ajax::runActiveAction(Modal::MODAL_NAME, 'redirect', new ModalAjax($objModal->current(), $arrConfig));
-		Ajax::runActiveAction(Modal::MODAL_NAME, 'show', new ModalAjax($objModal->current(), $arrConfig));
-		
 		// if modal not found by alias, unset auto_item $_GET Parameter as other modules may look for it
 		if (!$blnForwardAutoItem) {
 			unset($_GET['auto_item']);
@@ -208,7 +203,11 @@ class ModalController extends \Controller
 		}
 		
 		$objModel  = $objModel->current();
+		
 		$arrConfig = static::getModalConfig($objModel, $objLayout, $objPage);
+		
+		Ajax::runActiveAction(Modal::MODAL_NAME, 'redirect', new ModalAjax($objModel->current(), $arrConfig));
+		Ajax::runActiveAction(Modal::MODAL_NAME, 'show', new ModalAjax($objModel->current(), $arrConfig));
 		
 		if (empty($arrConfig)) {
 			$blnCheck = false;

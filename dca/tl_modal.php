@@ -175,7 +175,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = array
 			'label'            => &$GLOBALS['TL_LANG']['tl_modal']['modal'],
 			'exclude'          => true,
 			'inputType'        => 'select',
-			'options_callback' => array('HeimrichHannot\Modal\Backend\Layout', 'getModalOptions'),
+			'options_callback' => array('HeimrichHannot\Modal\Backend\LayoutBackend', 'getModalOptions'),
 			'reference'        => &$GLOBALS['TL_LANG']['modals'],
 			'eval'             => array('includeBlankOption' => true, 'mandatory' => true),
 			'sql'              => "varchar(64) NOT NULL default ''",

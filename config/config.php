@@ -17,8 +17,8 @@ $GLOBALS['TL_PERMISSIONS'][] = 'modalp';
 /**
  * Hooks
  */
-$GLOBALS['TL_HOOKS']['getContentSourceOptions'][]           = array('HeimrichHannot\Modal\Backend\Content', 'addSourceOptions');
-$GLOBALS['TL_HOOKS']['getDisclaimerSourceOptions'][]        = array('HeimrichHannot\Modal\Backend\Disclaimer', 'addSourceOptions');
+$GLOBALS['TL_HOOKS']['getContentSourceOptions'][]           = array('HeimrichHannot\Modal\Backend\ContentBackend', 'addSourceOptions');
+$GLOBALS['TL_HOOKS']['getDisclaimerSourceOptions'][]        = array('HeimrichHannot\Modal\Backend\DisclaimerBackend', 'addSourceOptions');
 $GLOBALS['TL_HOOKS']['showDisclaimer'][]                    = array('HeimrichHannot\Modal\Hooks', 'showDisclaimerHook');
 $GLOBALS['TL_HOOKS']['generateTeaserLink'][]                = array('HeimrichHannot\Modal\Elements\Teaser', 'generateModalTeaserLink');
 $GLOBALS['TL_HOOKS']['getPageLayout'][]                     = array('HeimrichHannot\Modal\ModalController', 'setModalAutoItem');
