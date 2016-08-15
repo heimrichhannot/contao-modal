@@ -42,13 +42,14 @@ $GLOBALS['TL_AUTO_ITEM'][] = 'modals';
 /**
  * Modal module configuration
  */
-$GLOBALS['MODAL_MODULES'] = array
+array_insert($GLOBALS['MODAL_MODULES'], 1, array
 (
-	'newslist' => array
+	'news_list' => array
 	(
-		'invokePalette' => 'customTpl;',
-	),
-);
+		'invokePalette' => 'news_archives'
+	)
+));
+
 
 /**
  * Ajax Actions
