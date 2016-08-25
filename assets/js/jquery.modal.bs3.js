@@ -23,7 +23,7 @@
                     url: url,
                     dataType: 'json',
                     error: function(jqXHR, textStatus, errorThrown) {
-                        if (jqXHR.status == 301) {
+                        if (jqXHR.status == 300) {
                             location.href = jqXHR.responseJSON.result.data.url;
                             closeModal(jqXHR.responseJSON, $form);
                             return;
@@ -42,7 +42,9 @@
 
                             if(typeof response.result.data.url !== 'undefined')
                             {
-                                history.pushState({}, null, response.result.data.url);
+                                if(window.history && window.history.pushState){
+                                    history.pushState({}, null, response.result.data.url);
+                                }
                             }
                         }
                     }
@@ -69,7 +71,9 @@
                     this.pause();
                 });
 
-                history.pushState({}, null, $this.data('back'));
+                if (window.history && window.history.pushState){
+                    history.pushState({}, null, $this.data('back'));
+                }
             });
         },
         bindPopState : function(){
