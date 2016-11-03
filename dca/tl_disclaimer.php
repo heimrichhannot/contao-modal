@@ -8,6 +8,8 @@
  * @license http://www.gnu.org/licences/lgpl-3.0.html LGPL
  */
 
+if(!in_array('disclaimer', \ModuleLoader::getActive())) return;
+
 $arrDca = &$GLOBALS['TL_DCA']['tl_disclaimer'];
 
 $arrDca['config']['onload_callback'][] = array('HeimrichHannot\Modal\Backend\DisclaimerBackend', 'modifyPalette');
