@@ -15,7 +15,14 @@
                 var $el = $(this),
                     url = $el.attr('href');
 
-                if (!url) {
+                // support xlink:href within svg
+                if (typeof url == 'undefined') {
+                    url = $el.attr('xlink:href');
+                }
+
+                console.log(url);
+
+                if (typeof url == 'undefined') {
                     return false;
                 }
 

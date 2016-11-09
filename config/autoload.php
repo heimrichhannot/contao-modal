@@ -34,6 +34,7 @@ ClassLoader::addClasses(array
 	'HeimrichHannot\Modal\ModalLink'                 => 'system/modules/modal/classes/ModalLink.php',
 	'HeimrichHannot\Modal\ModalController'           => 'system/modules/modal/classes/ModalController.php',
 	'HeimrichHannot\Modal\Hooks'                     => 'system/modules/modal/classes/Hooks.php',
+	'HeimrichHannot\Modal\Backend\NewsBackend'       => 'system/modules/modal/classes/backend/NewsBackend.php',
 	'HeimrichHannot\Modal\Backend\LayoutBackend'     => 'system/modules/modal/classes/backend/LayoutBackend.php',
 	'HeimrichHannot\Modal\Backend\ContentBackend'    => 'system/modules/modal/classes/backend/ContentBackend.php',
 	'HeimrichHannot\Modal\Backend\ModuleBackend'     => 'system/modules/modal/classes/backend/ModuleBackend.php',

@@ -18,14 +18,18 @@ $GLOBALS['TL_PERMISSIONS'][] = 'modalp';
  * Hooks
  */
 $GLOBALS['TL_HOOKS']['getContentSourceOptions'][]           = array('HeimrichHannot\Modal\Backend\ContentBackend', 'addSourceOptions');
-$GLOBALS['TL_HOOKS']['getDisclaimerSourceOptions'][]        = array('HeimrichHannot\Modal\Backend\DisclaimerBackend', 'addSourceOptions');
-$GLOBALS['TL_HOOKS']['showDisclaimer'][]                    = array('HeimrichHannot\Modal\Hooks', 'showDisclaimerHook');
 $GLOBALS['TL_HOOKS']['generateTeaserLink'][]                = array('HeimrichHannot\Modal\Elements\Teaser', 'generateModalTeaserLink');
 $GLOBALS['TL_HOOKS']['getPageLayout'][]                     = array('HeimrichHannot\Modal\ModalController', 'setModalAutoItem');
 $GLOBALS['TL_HOOKS']['generatePage'][]                      = array('HeimrichHannot\Modal\ModalController', 'generatePageWithModal');
 $GLOBALS['TL_HOOKS']['replaceDynamicScriptTags'][]          = array('HeimrichHannot\Modal\ModalController', 'hookReplaceDynamicScriptTags');
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][]                 = array('HeimrichHannot\Modal\ModalController', 'replaceModalInsertTags');
 $GLOBALS['TL_HOOKS']['parseArticles']['modalParseArticles'] = array('HeimrichHannot\Modal\Hooks', 'parseArticlesHook');
+
+if(in_array('disclaimer', \ModuleLoader::getActive()))
+{
+    $GLOBALS['TL_HOOKS']['getDisclaimerSourceOptions'][]        = array('HeimrichHannot\Modal\Backend\DisclaimerBackend', 'addSourceOptions');
+    $GLOBALS['TL_HOOKS']['showDisclaimer'][]                    = array('HeimrichHannot\Modal\Hooks', 'showDisclaimerHook');
+}
 
 /**
  * Models
