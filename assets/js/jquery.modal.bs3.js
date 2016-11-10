@@ -20,8 +20,6 @@
                     url = $el.attr('xlink:href');
                 }
 
-                console.log(url);
-
                 if (typeof url == 'undefined') {
                     return false;
                 }

@@ -95,7 +95,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = array
 	'palettes'    => array
 	(
 		'__selector__' => array('customModal', 'customHeader', 'addFooter', 'published'),
-		'default'      => '{general_legend},title,alias;{header_legend},headline,usePageTitle,customHeader;{footer_legend},addFooter;{expert_legend},customModal;{publish_legend},published;',
+		'default'      => '{general_legend},title,alias;{header_legend},headline,usePageTitle,customHeader;{footer_legend},addFooter;{expert_legend},customModal,autoItemMode;{publish_legend},published;',
 	),
 	'subpalettes' => array
 	(
@@ -228,6 +228,15 @@ $GLOBALS['TL_DCA']['tl_modal'] = array
 			'explanation' => 'insertTags',
 			'sql'         => "mediumtext NULL",
 		),
+        'autoItemMode' => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_modal']['autoItemMode'],
+            'exclude'   => true,
+            'filter'    => true,
+            'inputType' => 'checkbox',
+            'eval'      => array('submitOnChange' => true),
+            'sql'       => "char(1) NOT NULL default ''",
+        ),
 		'published'    => array
 		(
 			'label'     => &$GLOBALS['TL_LANG']['tl_modal']['published'],

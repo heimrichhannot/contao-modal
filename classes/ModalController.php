@@ -10,10 +10,9 @@
 
 namespace HeimrichHannot\Modal;
 
-
-use Contao\PageModel;
 use HeimrichHannot\Ajax\Ajax;
 use HeimrichHannot\Ajax\AjaxAction;
+use HeimrichHannot\Ajax\Response\Response404;
 
 class ModalController extends \Controller
 {
@@ -146,9 +145,29 @@ class ModalController extends \Controller
 		
 		if ($objModal === null && $objPage->linkModal) {
 			$objModal = ModalModel::findPublishedByIdOrAlias($objPage->modal);
-			
+
+            // only forward auto item if modal is found and auto_item not same as modal alias (otherwise for example ModuleNewsReader will generate 404)
 			if ($objModal !== null) {
-				$blnForwardAutoItem = true;
+
+                $blnForwardAutoItem = true;
+
+                if($objModal->alias == $_GET['auto_item'])
+                {
+                    $blnForwardAutoItem = false;
+
+                    if($objModal->autoItemMode)
+                    {
+                        if(Ajax::isRelated(\HeimrichHannot\Modal\Modal::MODAL_NAME))
+                        {
+                            $objResponse = new Response404('No related entity within modal found.');
+                            $objResponse->output();
+                        }
+
+                        /** @var \PageError404 $objHandler */
+                        $objHandler = new $GLOBALS['TL_PTY']['error_404']();
+                        $objHandler->generate($objPage->id);
+                    }
+                }
 			}
 		}
 		
@@ -180,13 +199,13 @@ class ModalController extends \Controller
 	public function generatePageWithModal($objPage, $objLayout, &$objPageRegular)
 	{
 		// Do not index or cache the page if no modal item has been specified
-		if (!\Input::get('modals')) {
+		if (!\Input::get('modals') || $objPage->type != 'regular') {
 			/** @var \PageModel $objPage */
 			global $objPage;
 			
 			$objPage->noSearch = 1;
 			$objPage->cache    = 0;
-			
+
 			return;
 		}
 		
@@ -225,7 +244,7 @@ class ModalController extends \Controller
 		$objModal->setBackLink($back);
 		// render modal within main, as it is the most commonly used region and enabled within contao by default
 		$strBuffer = $objModal->generate();
-		
+
 		$objPageRegular->Template->main .= $strBuffer;
 	}
 	
