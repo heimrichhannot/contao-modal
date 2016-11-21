@@ -198,20 +198,15 @@ class ModalController extends \Controller
 	 */
 	public function generatePageWithModal($objPage, $objLayout, &$objPageRegular)
 	{
-		// Do not index or cache the page if no modal item has been specified
+		// Do not handle the page if no modal item has been specified or page is no regular
 		if (!\Input::get('modals') || $objPage->type != 'regular') {
-			/** @var \PageModel $objPage */
-			global $objPage;
-			
-			$objPage->noSearch = 1;
-			$objPage->cache    = 0;
-
 			return;
 		}
 		
 		$objModel = ModalModel::findPublishedByIdOrAliasWithoutLinkedPage(\Input::get('modals'));
 		
-		if ($objModel === null && $objPage->linkModal) {
+		if ($objModel === null && $objPage->linkModal)
+		{
 			$objModel = ModalModel::findPublishedByIdOrAlias($objPage->modal);
 		}
 		
@@ -228,7 +223,8 @@ class ModalController extends \Controller
 		Ajax::runActiveAction(Modal::MODAL_NAME, 'redirect', new ModalAjax($objModel->current(), $arrConfig));
 		Ajax::runActiveAction(Modal::MODAL_NAME, 'show', new ModalAjax($objModel->current(), $arrConfig));
 		
-		if (empty($arrConfig)) {
+		if (empty($arrConfig))
+		{
 			$blnCheck = false;
 		}
 		
