@@ -27,7 +27,7 @@
                 $.ajax({
                     url: url,
                     dataType: 'json',
-                    error: function(jqXHR, textStatus, errorThrown) {
+                    error: function (jqXHR, textStatus, errorThrown) {
                         if (jqXHR.status == 300) {
                             location.href = jqXHR.responseJSON.result.data.url;
                             closeModal(jqXHR.responseJSON, $form);
@@ -45,9 +45,8 @@
                             $('body').find('.bs-modal').remove();
                             $modal.appendTo('body').modal('show');
 
-                            if(typeof response.result.data.url !== 'undefined')
-                            {
-                                if(window.history && window.history.pushState){
+                            if (typeof response.result.data.url !== 'undefined') {
+                                if (window.history && window.history.pushState) {
                                     history.pushState({}, null, response.result.data.url);
                                 }
                             }
@@ -76,14 +75,14 @@
                     this.pause();
                 });
 
-                if (window.history && window.history.pushState){
+                if (window.history && window.history.pushState) {
                     history.pushState({}, null, $this.data('back'));
                 }
             });
         },
-        bindPopState : function(){
+        bindPopState: function () {
             // If a pushstate has previously happened and the back button is clicked, hide any modals.
-            $(window).on('popstate', function() {
+            $(window).on('popstate', function () {
                 $('.bs-modal').modal('hide');
             });
         }

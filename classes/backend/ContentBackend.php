@@ -15,69 +15,69 @@ use HeimrichHannot\Modal\ModalModel;
 
 class ContentBackend extends \Backend
 {
-	/**
-	 * Import the back end user object
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-		$this->import('BackendUser', 'User');
-	}
+    /**
+     * Import the back end user object
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->import('BackendUser', 'User');
+    }
 
-	/**
-	 * Return all modals grouped by archive
-	 *
-	 * @param  \DataContainer $dc
-	 *
-	 * @return array
-	 */
-	public function getModalOptions(\DataContainer $dc)
-	{
-		$arrOptions = array();
+    /**
+     * Return all modals grouped by archive
+     *
+     * @param  \DataContainer $dc
+     *
+     * @return array
+     */
+    public function getModalOptions(\DataContainer $dc)
+    {
+        $arrOptions = array();
 
-		$objModal = ModalModel::findAll();
+        $objModal = ModalModel::findAll();
 
-		if($objModal === null)
-		{
-			return $arrOptions;
-		}
+        if ($objModal === null)
+        {
+            return $arrOptions;
+        }
 
-		while($objModal->next())
-		{
-			if(($objArchive = $objModal->getRelated('pid')) === null)
-			{
-				continue;
-			}
+        while ($objModal->next())
+        {
+            if (($objArchive = $objModal->getRelated('pid')) === null)
+            {
+                continue;
+            }
 
-			$arrOptions[$objArchive->title][$objModal->id] = $objModal->title;
-		}
+            $arrOptions[$objArchive->title][$objModal->id] = $objModal->title;
+        }
 
-		return $arrOptions;
-	}
+        return $arrOptions;
+    }
 
-	/**
-	 * Add the source options depending on the allowed fields
-	 *
-	 * @param array           $arrOptions
-	 * @param  \DataContainer $dc
-	 *
-	 * @return array
-	 */
-	public function addSourceOptions(array $arrOptions = array(), \DataContainer $dc)
-	{
-		if ($this->User->isAdmin)
-		{
-			$arrOptions[] = 'modal';
+    /**
+     * Add the source options depending on the allowed fields
+     *
+     * @param array           $arrOptions
+     * @param  \DataContainer $dc
+     *
+     * @return array
+     */
+    public function addSourceOptions(array $arrOptions = array(), \DataContainer $dc)
+    {
+        if ($this->User->isAdmin)
+        {
+            $arrOptions[] = 'modal';
 
-			return $arrOptions;
-		}
+            return $arrOptions;
+        }
 
-		// Add the "modal" option
-		if ($this->User->hasAccess('tl_content::modal', 'alexf'))
-		{
-			$arrOptions[] = 'modal';
-		}
+        // Add the "modal" option
+        if ($this->User->hasAccess('tl_content::modal', 'alexf'))
+        {
+            $arrOptions[] = 'modal';
+        }
 
-		return $arrOptions;
-	}
+        return $arrOptions;
+    }
 }

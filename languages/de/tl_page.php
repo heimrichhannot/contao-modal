@@ -14,7 +14,7 @@ $arrLang = &$GLOBALS['TL_LANG']['tl_page'];
  * Fields
  */
 $arrLang['linkModal'] = array('Modal verknüpfen', 'Verknüpfen Sie ein Modal aus mit der Seite.');
-$arrLang['modal'] = array('Modal', 'Wählen Sie ein Modal aus, dass mit der Seite verknüpft werden soll.');
+$arrLang['modal']     = array('Modal', 'Wählen Sie ein Modal aus, dass mit der Seite verknüpft werden soll.');
 
 /**
  * Legends

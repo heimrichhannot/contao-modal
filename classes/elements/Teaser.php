@@ -18,40 +18,39 @@ class Teaser extends ModalController
 {
 
 
+    /**
+     * @param \HeimrichHannot\Teaser\ContentLinkTeaser $objElement
+     * @param bool                                     $blnShowMore
+     *
+     * @return bool true if teaser modal link is valid
+     */
+    public function generateModalTeaserLink(&$objElement, $blnShowMore)
+    {
+        if ($objElement->source != 'modal' && !$objElement->modal)
+        {
+            return $blnShowMore;
+        }
 
-	/**
-	 * @param \HeimrichHannot\Teaser\ContentLinkTeaser $objElement
-	 * @param bool $blnShowMore
-	 *
-	 * @return bool true if teaser modal link is valid
- 	 */
-	public function generateModalTeaserLink(&$objElement, $blnShowMore)
-	{
-		if($objElement->source != 'modal' && !$objElement->modal)
-		{
-			return $blnShowMore;
-		}
+        $objModal = ModalModel::findByPk($objElement->modal);
 
-		$objModal = ModalModel::findByPk($objElement->modal);
+        if ($objModal === null)
+        {
+            return false;
+        }
 
-		if($objModal === null)
-		{
-			return false;
-		}
+        $arrConfig = static::getModalConfig($objModal);
 
-		$arrConfig = static::getModalConfig($objModal);
-		
-		$blnAjax = true;
-		$objElement->setHref(ModalController::generateModalUrl($objModal->row(), $objElement->jumpTo, $blnAjax));
-		$objElement->setTitle($objModal->title);
+        $blnAjax = true;
+        $objElement->setHref(ModalController::generateModalUrl($objModal->row(), $objElement->jumpTo, $blnAjax));
+        $objElement->setTitle($objModal->title);
 
-		if($blnAjax && is_array($arrConfig['link']['attributes']))
-		{
-			$objElement->setLinkAttributes($arrConfig['link']['attributes']);
-		}
+        if ($blnAjax && is_array($arrConfig['link']['attributes']))
+        {
+            $objElement->setLinkAttributes($arrConfig['link']['attributes']);
+        }
 
 
-		return true;
-	}
+        return true;
+    }
 
 }

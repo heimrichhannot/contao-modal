@@ -16,9 +16,9 @@ use HeimrichHannot\Modal\ModalController;
 class LayoutBackend extends \Backend
 {
 
-	public function getModalOptions()
-	{
-		return ModalController::getModalTypes();
-	}
-	
+    public function getModalOptions()
+    {
+        return ModalController::getModalTypes();
+    }
+
 }

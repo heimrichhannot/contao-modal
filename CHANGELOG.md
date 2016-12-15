@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.8] - 2016-12-14
+
+### Added
+- added new options to prevent closing of the modal window.
+
 ## [1.2.7] - 2016-11-21
 
 ### Fixed

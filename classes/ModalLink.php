@@ -13,121 +13,120 @@ namespace HeimrichHannot\Modal;
 
 class ModalLink extends Modal
 {
-	protected $arrLinkAttributes = array();
+    protected $arrLinkAttributes = array();
 
-	protected $linkText;
+    protected $linkText;
 
-	protected $jumpTo;
+    protected $jumpTo;
 
-	public function __construct(\Model $objModel, array $arrConfig)
-	{
-		parent::__construct($objModel, $arrConfig);
+    public function __construct(\Model $objModel, array $arrConfig)
+    {
+        parent::__construct($objModel, $arrConfig);
 
-		$this->setLinkText($this->title);
-	}
+        $this->setLinkText($this->title);
+    }
 
-	public function generate()
-	{
-		$this->strTemplate = 'modallink_' . $this->objConfig->type;
+    public function generate()
+    {
+        $this->strTemplate = 'modallink_' . $this->objConfig->type;
 
-		if(is_array($this->objConfig->link['attributes']))
-		{
-			$this->setLinkAttributes($this->objConfig->link['attributes']);
-		}
+        if (is_array($this->objConfig->link['attributes']))
+        {
+            $this->setLinkAttributes($this->objConfig->link['attributes']);
+        }
 
-		return parent::generate();
-	}
-
-
-	protected function compile()
-	{
-		$this->Template->href = ModalController::generateModalUrl($this->objModel->row(), $this->getJumpTo());
-		$this->Template->link = $this->getLinkText();
-		$this->Template->linkAttributes = $this->getLinkAttributes(true);
-		$this->Template->linkTitle = $this->title;
-	}
+        return parent::generate();
+    }
 
 
-	public function setLinkAttributes($arrData, $delimiter=" ")
-	{
-		// set from string
-		if(!is_array($arrData))
-		{
-			$arrData = trimsplit($delimiter, $arrData);
+    protected function compile()
+    {
+        $this->Template->href           = ModalController::generateModalUrl($this->objModel->row(), $this->getJumpTo());
+        $this->Template->link           = $this->getLinkText();
+        $this->Template->linkAttributes = $this->getLinkAttributes(true);
+        $this->Template->linkTitle      = $this->title;
+    }
 
-			if(is_array($arrData))
-			{
-				foreach (array_keys($this->arrLinkAttributes) as $strKey)
-				{
-					$this->arrLinkAttributes[$strKey] = $arrData[$strKey];
-				}
-			}
 
-			return;
-		}
+    public function setLinkAttributes($arrData, $delimiter = " ")
+    {
+        // set from string
+        if (!is_array($arrData))
+        {
+            $arrData = trimsplit($delimiter, $arrData);
 
-		$this->arrLinkAttributes = $arrData;
-	}
+            if (is_array($arrData))
+            {
+                foreach (array_keys($this->arrLinkAttributes) as $strKey)
+                {
+                    $this->arrLinkAttributes[$strKey] = $arrData[$strKey];
+                }
+            }
 
-	public function getLinkAttributes($blnReturnString=false)
-	{
-		if(!$blnReturnString)
-		{
-			return $this->arrLinkAttributes;
-		}
+            return;
+        }
 
-		$strAttributes = '';
+        $this->arrLinkAttributes = $arrData;
+    }
 
-		foreach (array_keys($this->arrLinkAttributes) as $strKey)
-		{
-			$strAttributes .= sprintf('%s="%s"', $strKey, $this->arrLinkAttributes[$strKey]);
-		}
+    public function getLinkAttributes($blnReturnString = false)
+    {
+        if (!$blnReturnString)
+        {
+            return $this->arrLinkAttributes;
+        }
 
-		return $strAttributes;
-	}
+        $strAttributes = '';
 
-	public function addLinkAttribute($key, $value)
-	{
-		$this->arrLinkAttributes[$key] = $value;
-	}
+        foreach (array_keys($this->arrLinkAttributes) as $strKey)
+        {
+            $strAttributes .= sprintf('%s="%s"', $strKey, $this->arrLinkAttributes[$strKey]);
+        }
 
-	public function removeLinkAttribute($key)
-	{
-		unset($this->arrLinkAttributes);
-	}
+        return $strAttributes;
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function getLinkText()
-	{
-		return $this->linkText;
-	}
+    public function addLinkAttribute($key, $value)
+    {
+        $this->arrLinkAttributes[$key] = $value;
+    }
 
-	/**
-	 * @param mixed $linkText
-	 */
-	public function setLinkText($linkText)
-	{
-		$this->linkText = $linkText;
-	}
+    public function removeLinkAttribute($key)
+    {
+        unset($this->arrLinkAttributes);
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function getJumpTo()
-	{
-		return $this->jumpTo;
-	}
+    /**
+     * @return mixed
+     */
+    public function getLinkText()
+    {
+        return $this->linkText;
+    }
 
-	/**
-	 * @param mixed $jumpTo
-	 */
-	public function setJumpTo($jumpTo)
-	{
-		$this->jumpTo = $jumpTo;
-	}
+    /**
+     * @param mixed $linkText
+     */
+    public function setLinkText($linkText)
+    {
+        $this->linkText = $linkText;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getJumpTo()
+    {
+        return $this->jumpTo;
+    }
+
+    /**
+     * @param mixed $jumpTo
+     */
+    public function setJumpTo($jumpTo)
+    {
+        $this->jumpTo = $jumpTo;
+    }
 
 
 }

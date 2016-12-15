@@ -25,24 +25,22 @@ $arrDca['subpalettes']['useModal'] = 'useModalExplanation';
 /**
  * Fields
  */
-$arrFields = array
-(
-	'useModal'            => array(
-		'label'     => &$GLOBALS['TL_LANG']['tl_module']['useModal'],
-		'exclude'   => true,
-		'inputType' => 'checkbox',
-		'eval'      => array('tl_class' => 'w50 clr', 'submitOnChange' => true),
-		'sql'       => "char(1) NOT NULL default ''",
-	),
-	'useModalExplanation' => array
-	(
-		'inputType' => 'explanation',
-		'eval'      => array(
-			'text'     => &$GLOBALS['TL_LANG']['tl_module']['useModalExplanation'],
-			'class'    => 'tl_info',
-			'tl_class' => 'clr long',
-		),
-	),
+$arrFields = array(
+    'useModal'            => array(
+        'label'     => &$GLOBALS['TL_LANG']['tl_module']['useModal'],
+        'exclude'   => true,
+        'inputType' => 'checkbox',
+        'eval'      => array('tl_class' => 'w50 clr', 'submitOnChange' => true),
+        'sql'       => "char(1) NOT NULL default ''",
+    ),
+    'useModalExplanation' => array(
+        'inputType' => 'explanation',
+        'eval'      => array(
+            'text'     => &$GLOBALS['TL_LANG']['tl_module']['useModalExplanation'],
+            'class'    => 'tl_info',
+            'tl_class' => 'clr long',
+        ),
+    ),
 );
 
 $arrDca['fields'] = array_merge($arrDca['fields'], $arrFields);

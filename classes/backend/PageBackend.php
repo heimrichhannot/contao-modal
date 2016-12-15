@@ -15,35 +15,35 @@ use HeimrichHannot\Modal\ModalModel;
 
 class PageBackend extends \Backend
 {
-	/**
-	 * Return all modals grouped by archive
-	 *
-	 * @param  \DataContainer $dc
-	 *
-	 * @return array
-	 */
-	public function getModalOptions(\DataContainer $dc)
-	{
-		$arrOptions = array();
-		
-		$objModal = ModalModel::findAll();
-		
-		if($objModal === null)
-		{
-			return $arrOptions;
-		}
-		
-		while($objModal->next())
-		{
-			if(($objArchive = $objModal->getRelated('pid')) === null)
-			{
-				continue;
-			}
-			
-			$arrOptions[$objArchive->title][$objModal->id] = $objModal->title;
-		}
-		
-		return $arrOptions;
-	}
-	
+    /**
+     * Return all modals grouped by archive
+     *
+     * @param  \DataContainer $dc
+     *
+     * @return array
+     */
+    public function getModalOptions(\DataContainer $dc)
+    {
+        $arrOptions = array();
+
+        $objModal = ModalModel::findAll();
+
+        if ($objModal === null)
+        {
+            return $arrOptions;
+        }
+
+        while ($objModal->next())
+        {
+            if (($objArchive = $objModal->getRelated('pid')) === null)
+            {
+                continue;
+            }
+
+            $arrOptions[$objArchive->title][$objModal->id] = $objModal->title;
+        }
+
+        return $arrOptions;
+    }
+
 }

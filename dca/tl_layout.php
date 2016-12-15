@@ -29,27 +29,24 @@ $dc['subpalettes']['customModal'] = 'modal';
 /**
  * Fields
  */
-$arrFields = array
-(
-	'customModal' => array
-	(
-		'label'     => &$GLOBALS['TL_LANG']['tl_layout']['customModal'],
-		'exclude'   => true,
-		'filter'    => true,
-		'inputType' => 'checkbox',
-		'eval'      => array('submitOnChange' => true),
-		'sql'       => "char(1) NOT NULL default ''",
-	),
-	'modal' => array
-	(
-		'label'            => &$GLOBALS['TL_LANG']['tl_layout']['modal'],
-		'exclude'          => true,
-		'inputType'        => 'select',
-		'options_callback' => array('HeimrichHannot\Modal\Backend\LayoutBackend', 'getModalOptions'),
-		'reference'        => &$GLOBALS['TL_LANG']['modals'],
-		'eval'			 => array('includeBlankOption' => true, 'mandatory' => true),
-		'sql'              => "varchar(64) NOT NULL default ''",
-	),
+$arrFields = array(
+    'customModal' => array(
+        'label'     => &$GLOBALS['TL_LANG']['tl_layout']['customModal'],
+        'exclude'   => true,
+        'filter'    => true,
+        'inputType' => 'checkbox',
+        'eval'      => array('submitOnChange' => true),
+        'sql'       => "char(1) NOT NULL default ''",
+    ),
+    'modal'       => array(
+        'label'            => &$GLOBALS['TL_LANG']['tl_layout']['modal'],
+        'exclude'          => true,
+        'inputType'        => 'select',
+        'options_callback' => array('HeimrichHannot\Modal\Backend\LayoutBackend', 'getModalOptions'),
+        'reference'        => &$GLOBALS['TL_LANG']['modals'],
+        'eval'             => array('includeBlankOption' => true, 'mandatory' => true),
+        'sql'              => "varchar(64) NOT NULL default ''",
+    ),
 );
 
 $dc['fields'] = array_merge($dc['fields'], $arrFields);

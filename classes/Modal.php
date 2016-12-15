@@ -13,177 +13,185 @@ namespace HeimrichHannot\Modal;
 
 class Modal extends \Frontend
 {
-	const MODAL_NAME = 'modal';
-	
-	protected $objModel;
+    const MODAL_NAME = 'modal';
 
-	protected $objConfig;
+    protected $objModel;
 
-	protected $backLink;
+    protected $objConfig;
 
-	protected $strTemplate;
+    protected $backLink;
 
-	/**
-	 * Current record
-	 * @var array
-	 */
-	protected $arrData = array();
+    protected $strTemplate;
 
-	public function __construct(\Model $objModel, array $arrConfig)
-	{
-		$this->objModel = $objModel;
-		$this->objConfig = (object) $arrConfig;
-		$this->arrData = $objModel->row();
+    /**
+     * Current record
+     *
+     * @var array
+     */
+    protected $arrData = array();
 
-		$arrHeadline = deserialize($objModel->headline);
-		$this->headline = is_array($arrHeadline) ? $arrHeadline['value'] : $arrHeadline;
-		$this->hl = is_array($arrHeadline) ? $arrHeadline['unit'] : 'h1';
-		$this->strTemplate = $this->objConfig->template;
-	}
+    public function __construct(\Model $objModel, array $arrConfig)
+    {
+        $this->objModel  = $objModel;
+        $this->objConfig = (object) $arrConfig;
+        $this->arrData   = $objModel->row();
 
-	public function generate()
-	{
-		global $objPage;
-		
-		$this->Template = new \FrontendTemplate($this->strTemplate);
-		$this->Template->setData($this->arrData);
-		
-		$this->Template->title = ''; // title should be empty by default, use headline or pageTitle instead
+        $arrHeadline       = deserialize($objModel->headline);
+        $this->headline    = is_array($arrHeadline) ? $arrHeadline['value'] : $arrHeadline;
+        $this->hl          = is_array($arrHeadline) ? $arrHeadline['unit'] : 'h1';
+        $this->strTemplate = $this->objConfig->template;
+    }
 
-		$arrClasses = array();
+    public function generate()
+    {
+        global $objPage;
 
-		if($this->objConfig->activeClass)
-		{
-			$arrClasses[] = $this->objConfig->activeClass;
-		}
-		
-		if ($this->Template->headline == '')
-		{
-			$this->Template->headline = $this->headline;
-		}
+        $this->Template = new \FrontendTemplate($this->strTemplate);
+        $this->Template->setData($this->arrData);
 
-		if ($this->Template->hl == '')
-		{
-			$this->Template->hl = $this->hl;
-		}
+        $this->Template->title = ''; // title should be empty by default, use headline or pageTitle instead
 
-		$this->Template->class = implode(' ', $arrClasses);
-		$this->Template->back = $this->getBackLink();
-		$this->Template->redirectBack = $this->getRedirectBack();
+        $arrClasses = array();
 
-		$this->compile();
+        if ($this->objConfig->activeClass)
+        {
+            $arrClasses[] = $this->objConfig->activeClass;
+        }
 
-		// HOOK: add custom logic
-		if (isset($GLOBALS['TL_HOOKS']['generateModal']) && is_array($GLOBALS['TL_HOOKS']['generateModal']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['generateModal'] as $callback)
-			{
-				static::importStatic($callback[0])->{$callback[1]}($this->Template, $this->objModel, $this->objConfig, $this);
-			}
-		}
+        if ($this->Template->headline == '')
+        {
+            $this->Template->headline = $this->headline;
+        }
 
-		return \Controller::replaceInsertTags($this->Template->parse());
-	}
+        if ($this->Template->hl == '')
+        {
+            $this->Template->hl = $this->hl;
+        }
 
-	protected function compile()
-	{
-		if($this->objConfig->header)
-		{
-			$this->Template->showHeader = true;
-		}
+        $this->Template->class        = implode(' ', $arrClasses);
+        $this->Template->back         = $this->getBackLink();
+        $this->Template->redirectBack = $this->getRedirectBack();
 
-		$id = $this->id;
+        $this->compile();
 
-		$this->Template->body = function () use ($id)
-		{
-			$strText = '';
-			$objElement = \ContentModel::findPublishedByPidAndTable($id, 'tl_modal');
+        // HOOK: add custom logic
+        if (isset($GLOBALS['TL_HOOKS']['generateModal']) && is_array($GLOBALS['TL_HOOKS']['generateModal']))
+        {
+            foreach ($GLOBALS['TL_HOOKS']['generateModal'] as $callback)
+            {
+                static::importStatic($callback[0])->{$callback[1]}($this->Template, $this->objModel, $this->objConfig, $this);
+            }
+        }
 
-			if ($objElement !== null)
-			{
-				while ($objElement->next())
-				{
-					$strContent = $this->getContentElement($objElement->current());
-					
-					// HOOK: add custom logic
-					if (isset($GLOBALS['TL_HOOKS']['getModalContentElement']) && is_array($GLOBALS['TL_HOOKS']['getModalContentElement']))
-					{
-						foreach ($GLOBALS['TL_HOOKS']['getModalContentElement'] as $callback)
-						{
-							$strContent = static::importStatic($callback[0])->{$callback[1]}($objElement->current(), $strContent, $this->Template, $this->objModel, $this->objConfig, $this);
-						}
-					}
-					
-					$strText .= $strContent;
-				}
-			}
+        return \Controller::replaceInsertTags($this->Template->parse());
+    }
 
-			return $strText;
-		};
+    protected function compile()
+    {
+        if ($this->objConfig->header)
+        {
+            $this->Template->showHeader = true;
+        }
 
-		$this->Template->hasBody = (\ContentModel::countPublishedByPidAndTable($this->id, 'tl_modal') > 0);
+        $id = $this->id;
 
-		if($this->objConfig->footer && $this->addFooter)
-		{
-			$this->Template->showFooter = true;
-		}
-	}
+        $this->Template->body = function () use ($id)
+        {
+            $strText    = '';
+            $objElement = \ContentModel::findPublishedByPidAndTable($id, 'tl_modal');
 
-	/**
-	 * Set an object property
-	 *
-	 * @param string $strKey
-	 * @param mixed  $varValue
-	 */
-	public function __set($strKey, $varValue)
-	{
-		$this->arrData[$strKey] = $varValue;
-	}
+            if ($objElement !== null)
+            {
+                while ($objElement->next())
+                {
+                    $strContent = $this->getContentElement($objElement->current());
 
+                    // HOOK: add custom logic
+                    if (isset($GLOBALS['TL_HOOKS']['getModalContentElement']) && is_array($GLOBALS['TL_HOOKS']['getModalContentElement']))
+                    {
+                        foreach ($GLOBALS['TL_HOOKS']['getModalContentElement'] as $callback)
+                        {
+                            $strContent = static::importStatic($callback[0])->{$callback[1]}(
+                                $objElement->current(),
+                                $strContent,
+                                $this->Template,
+                                $this->objModel,
+                                $this->objConfig,
+                                $this
+                            );
+                        }
+                    }
 
-	/**
-	 * Return an object property
-	 *
-	 * @param string $strKey
-	 *
-	 * @return mixed
-	 */
-	public function __get($strKey)
-	{
-		if (isset($this->arrData[$strKey]))
-		{
-			return $this->arrData[$strKey];
-		}
+                    $strText .= $strContent;
+                }
+            }
 
-		return parent::__get($strKey);
-	}
+            return $strText;
+        };
+
+        $this->Template->hasBody = (\ContentModel::countPublishedByPidAndTable($this->id, 'tl_modal') > 0);
+
+        if ($this->objConfig->footer && $this->addFooter)
+        {
+            $this->Template->showFooter = true;
+        }
+    }
+
+    /**
+     * Set an object property
+     *
+     * @param string $strKey
+     * @param mixed  $varValue
+     */
+    public function __set($strKey, $varValue)
+    {
+        $this->arrData[$strKey] = $varValue;
+    }
 
 
-	/**
-	 * Check whether a property is set
-	 *
-	 * @param string $strKey
-	 *
-	 * @return boolean
-	 */
-	public function __isset($strKey)
-	{
-		return isset($this->arrData[$strKey]);
-	}
+    /**
+     * Return an object property
+     *
+     * @param string $strKey
+     *
+     * @return mixed
+     */
+    public function __get($strKey)
+    {
+        if (isset($this->arrData[$strKey]))
+        {
+            return $this->arrData[$strKey];
+        }
 
-	public function setBackLink($varValue)
-	{
-		$this->backLink = $varValue;
-	}
+        return parent::__get($strKey);
+    }
 
-	public function getBackLink()
-	{
-		return $this->backLink;
-	}
-	
-	public function getRedirectBack()
-	{
-		
-	}
+
+    /**
+     * Check whether a property is set
+     *
+     * @param string $strKey
+     *
+     * @return boolean
+     */
+    public function __isset($strKey)
+    {
+        return isset($this->arrData[$strKey]);
+    }
+
+    public function setBackLink($varValue)
+    {
+        $this->backLink = $varValue;
+    }
+
+    public function getBackLink()
+    {
+        return $this->backLink;
+    }
+
+    public function getRedirectBack()
+    {
+
+    }
 
 }
