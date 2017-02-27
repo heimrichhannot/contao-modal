@@ -28,7 +28,7 @@ class Modal extends \Frontend
      *
      * @var array
      */
-    protected $arrData = array();
+    protected $arrData = [];
 
     public function __construct(\Model $objModel, array $arrConfig)
     {
@@ -51,7 +51,7 @@ class Modal extends \Frontend
 
         $this->Template->title = ''; // title should be empty by default, use headline or pageTitle instead
 
-        $arrClasses = array();
+        $arrClasses = [];
 
         if ($this->objConfig->activeClass)
         {

@@ -10,7 +10,7 @@
 
 $arrDca = &$GLOBALS['TL_DCA']['tl_module'];
 
-$arrDca['config']['onload_callback'][] = array('HeimrichHannot\Modal\Backend\ModuleBackend', 'modifyDca');
+$arrDca['config']['onload_callback'][] = ['HeimrichHannot\Modal\Backend\ModuleBackend', 'modifyDca'];
 
 /**
  * Selectors
@@ -25,22 +25,22 @@ $arrDca['subpalettes']['useModal'] = 'useModalExplanation';
 /**
  * Fields
  */
-$arrFields = array(
-    'useModal'            => array(
+$arrFields = [
+    'useModal'            => [
         'label'     => &$GLOBALS['TL_LANG']['tl_module']['useModal'],
         'exclude'   => true,
         'inputType' => 'checkbox',
-        'eval'      => array('tl_class' => 'w50 clr', 'submitOnChange' => true),
+        'eval'      => ['tl_class' => 'w50 clr', 'submitOnChange' => true],
         'sql'       => "char(1) NOT NULL default ''",
-    ),
-    'useModalExplanation' => array(
+    ],
+    'useModalExplanation' => [
         'inputType' => 'explanation',
-        'eval'      => array(
+        'eval'      => [
             'text'     => &$GLOBALS['TL_LANG']['tl_module']['useModalExplanation'],
             'class'    => 'tl_info',
             'tl_class' => 'clr long',
-        ),
-    ),
-);
+        ],
+    ],
+];
 
 $arrDca['fields'] = array_merge($arrDca['fields'], $arrFields);

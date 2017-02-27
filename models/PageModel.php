@@ -20,10 +20,10 @@ class PageModel extends \PageModel
      *
      * @return \Model\Collection|\PageModel[]|\PageModel|null A collection of models or null if there is no matching pages
      */
-    public static function findAllPublishedLinkedWithModal(array $arrOptions = array())
+    public static function findAllPublishedLinkedWithModal(array $arrOptions = [])
     {
         $t          = static::$strTable;
-        $arrColumns = array("$t.linkModal = 1 AND $t.modal > 0");
+        $arrColumns = ["$t.linkModal = 1 AND $t.modal > 0"];
 
         // Check the publication status (see #4652)
         if (!BE_USER_LOGGED_IN)

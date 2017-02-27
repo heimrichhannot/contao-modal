@@ -13,7 +13,7 @@ namespace HeimrichHannot\Modal;
 
 class ModalLink extends Modal
 {
-    protected $arrLinkAttributes = array();
+    protected $arrLinkAttributes = [];
 
     protected $linkText;
 

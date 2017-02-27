@@ -13,9 +13,9 @@
  * Register the namespaces
  */
 ClassLoader::addNamespaces(
-    array(
+    [
         'HeimrichHannot',
-    )
+    ]
 );
 
 
@@ -23,7 +23,7 @@ ClassLoader::addNamespaces(
  * Register the classes
  */
 ClassLoader::addClasses(
-    array(
+    [
         // Models
         'HeimrichHannot\Modal\PageModel'                 => 'system/modules/modal/models/PageModel.php',
         'HeimrichHannot\Modal\ModalModel'                => 'system/modules/modal/models/ModalModel.php',
@@ -42,7 +42,7 @@ ClassLoader::addClasses(
         'HeimrichHannot\Modal\Backend\DisclaimerBackend' => 'system/modules/modal/classes/backend/DisclaimerBackend.php',
         'HeimrichHannot\Modal\Backend\PageBackend'       => 'system/modules/modal/classes/backend/PageBackend.php',
         'HeimrichHannot\Modal\Elements\Teaser'           => 'system/modules/modal/classes/elements/Teaser.php',
-    )
+    ]
 );
 
 
@@ -50,10 +50,10 @@ ClassLoader::addClasses(
  * Register the templates
  */
 TemplateLoader::addFiles(
-    array(
+    [
         'modal_bs3_sm'          => 'system/modules/modal/templates/modals',
         'modal_bs3_default'     => 'system/modules/modal/templates/modals',
         'modal_bs3_lg'          => 'system/modules/modal/templates/modals',
         'modallink_bs3_default' => 'system/modules/modal/templates/links',
-    )
+    ]
 );

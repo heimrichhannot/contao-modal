@@ -138,7 +138,7 @@ class ModalController extends \Controller
     {
         if (!is_array($GLOBALS['TL_MODALS']))
         {
-            return array();
+            return [];
         }
 
         return array_keys($GLOBALS['TL_MODALS']);
@@ -275,7 +275,7 @@ class ModalController extends \Controller
     {
         $default   = static::getDefaultModalType();
         $arrTypes  = $GLOBALS['TL_MODALS'];
-        $arrConfig = array();
+        $arrConfig = [];
         $strType   = '';
 
         // default config
@@ -304,7 +304,7 @@ class ModalController extends \Controller
 
         if (is_array($arrTypes[$strType]))
         {
-            $arrConfig = array_merge(array('type' => $strType), $arrTypes[$strType]);
+            $arrConfig = array_merge(['type' => $strType], $arrTypes[$strType]);
         }
 
         return $arrConfig;
@@ -350,7 +350,7 @@ class ModalController extends \Controller
      *
      * @return string An URL that can be used in the front end
      */
-    public static function generateModalUrl(array $arrRow = array(), $jumpTo = null, &$blnAjax = true, &$blnRedirect = true)
+    public static function generateModalUrl(array $arrRow = [], $jumpTo = null, &$blnAjax = true, &$blnRedirect = true)
     {
         global $objPage;
         $strUrl    = '';
@@ -376,7 +376,7 @@ class ModalController extends \Controller
             if ($objJumpTo === null || $objPage->id == $objJumpTo->id)
             {
                 $blnRedirect = false;
-                $strUrl      = AjaxAction::generateUrl(Modal::MODAL_NAME, 'show', array(), false, $strUrl);
+                $strUrl      = AjaxAction::generateUrl(Modal::MODAL_NAME, 'show', [], false, $strUrl);
             } // force redirect to new page and set ajax to false
             else
             {
@@ -406,7 +406,7 @@ class ModalController extends \Controller
      *
      * @return string The converted modal link or the link if pattern did not match
      */
-    public static function convertLinkToModalLink($strLink, $strUrl, array $arrConfig = array(), $blnRedirect)
+    public static function convertLinkToModalLink($strLink, $strUrl, array $arrConfig = [], $blnRedirect)
     {
         $strSearch = '/<a(.*?)href="(?P<href>.*?)"(?P<attributes>.*?)>(?P<content>.*)/s';
 
@@ -418,7 +418,7 @@ class ModalController extends \Controller
         }
 
         $strAttribues  = $arrMatches['attributes'];
-        $arrAttributes = array();
+        $arrAttributes = [];
 
         if (is_array($arrConfig['link']['attributes']) && !$blnRedirect)
         {

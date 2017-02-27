@@ -29,26 +29,26 @@ $arrDca['subpalettes']['linkModal'] = 'modal';
 /**
  * Fields
  */
-$arrFields = array(
-    'linkModal' => array(
+$arrFields = [
+    'linkModal' => [
         'label'     => &$GLOBALS['TL_LANG']['tl_page']['linkModal'],
         'exclude'   => true,
         'filter'    => true,
         'inputType' => 'checkbox',
-        'eval'      => array('submitOnChange' => true),
+        'eval'      => ['submitOnChange' => true],
         'sql'       => "char(1) NOT NULL default ''",
-    ),
-    'modal'     => array(
+    ],
+    'modal'     => [
         'label'            => &$GLOBALS['TL_LANG']['tl_page']['modal'],
         'exclude'          => true,
         'search'           => true,
         'inputType'        => 'select',
         'foreignKey'       => 'tl_modal.title',
-        'options_callback' => array('HeimrichHannot\Modal\Backend\PageBackend', 'getModalOptions'),
-        'eval'             => array('tl_class' => 'w50 clr', 'mandatory' => true, 'includeBlankOption' => true, 'chosen' => true),
+        'options_callback' => ['HeimrichHannot\Modal\Backend\PageBackend', 'getModalOptions'],
+        'eval'             => ['tl_class' => 'w50 clr', 'mandatory' => true, 'includeBlankOption' => true, 'chosen' => true],
         'sql'              => "int(10) unsigned NOT NULL default '0'",
-        'relation'         => array('type' => 'belongsTo', 'load' => 'lazy'),
-    ),
-);
+        'relation'         => ['type' => 'belongsTo', 'load' => 'lazy'],
+    ],
+];
 
 $arrDca['fields'] = array_merge($arrDca['fields'], $arrFields);

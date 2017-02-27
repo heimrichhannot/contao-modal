@@ -40,7 +40,7 @@ class DisclaimerBackend extends \Backend
      *
      * @return array
      */
-    public function addSourceOptions(array $arrOptions = array(), \DataContainer $dc)
+    public function addSourceOptions(array $arrOptions = [], \DataContainer $dc)
     {
         if (\BackendUser::getInstance()->isAdmin)
         {
@@ -67,7 +67,7 @@ class DisclaimerBackend extends \Backend
      */
     public function getModalOptions(\DataContainer $dc)
     {
-        $arrOptions = array();
+        $arrOptions = [];
 
         $objModal = ModalModel::findAll();
 

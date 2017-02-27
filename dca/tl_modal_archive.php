@@ -1,124 +1,124 @@
 <?php
 
-$GLOBALS['TL_DCA']['tl_modal_archive'] = array(
-    'config'      => array(
+$GLOBALS['TL_DCA']['tl_modal_archive'] = [
+    'config'      => [
         'dataContainer'     => 'Table',
-        'ctable'            => array('tl_modal'),
+        'ctable'            => ['tl_modal'],
         'switchToEdit'      => true,
         'enableVersioning'  => false,
-        'onload_callback'   => array(
-            array('tl_modal_archive', 'checkPermission'),
-        ),
-        'onsubmit_callback' => array(
-            array('HeimrichHannot\Haste\Dca\General', 'setDateAdded'),
-        ),
-        'sql'               => array(
-            'keys' => array(
+        'onload_callback'   => [
+            ['tl_modal_archive', 'checkPermission'],
+        ],
+        'onsubmit_callback' => [
+            ['HeimrichHannot\Haste\Dca\General', 'setDateAdded'],
+        ],
+        'sql'               => [
+            'keys' => [
                 'id' => 'primary',
-            ),
-        ),
-    ),
-    'list'        => array(
-        'label'             => array(
-            'fields' => array('title'),
+            ],
+        ],
+    ],
+    'list'        => [
+        'label'             => [
+            'fields' => ['title'],
             'format' => '%s',
-        ),
-        'sorting'           => array(
+        ],
+        'sorting'           => [
             'mode'        => 1,
-            'fields'      => array('title'),
+            'fields'      => ['title'],
             'panelLayout' => 'filter;search,limit',
-        ),
-        'global_operations' => array(
-            'all' => array(
+        ],
+        'global_operations' => [
+            'all' => [
                 'label'      => &$GLOBALS['TL_LANG']['MSC']['all'],
                 'href'       => 'act=select',
                 'class'      => 'header_edit_all',
                 'attributes' => 'onclick="Backend.getScrollOffset();"',
-            ),
-        ),
-        'operations'        => array(
-            'edit'       => array(
+            ],
+        ],
+        'operations'        => [
+            'edit'       => [
                 'label' => &$GLOBALS['TL_LANG']['tl_modal_archive']['edit'],
                 'href'  => 'table=tl_modal',
                 'icon'  => 'edit.gif',
-            ),
-            'editheader' => array(
+            ],
+            'editheader' => [
                 'label'           => &$GLOBALS['TL_LANG']['tl_modal_archive']['editheader'],
                 'href'            => 'act=edit',
                 'icon'            => 'header.gif',
-                'button_callback' => array('tl_modal_archive', 'editHeader'),
-            ),
-            'copy'       => array(
+                'button_callback' => ['tl_modal_archive', 'editHeader'],
+            ],
+            'copy'       => [
                 'label'           => &$GLOBALS['TL_LANG']['tl_modal_archive']['copy'],
                 'href'            => 'act=copy',
                 'icon'            => 'copy.gif',
-                'button_callback' => array('tl_modal_archive', 'copyArchive'),
-            ),
-            'delete'     => array(
+                'button_callback' => ['tl_modal_archive', 'copyArchive'],
+            ],
+            'delete'     => [
                 'label'           => &$GLOBALS['TL_LANG']['tl_modal_archive']['copy'],
                 'href'            => 'act=delete',
                 'icon'            => 'delete.gif',
                 'attributes'      => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
-                'button_callback' => array('tl_modal_archive', 'deleteArchive'),
-            ),
-            'show'       => array(
+                'button_callback' => ['tl_modal_archive', 'deleteArchive'],
+            ],
+            'show'       => [
                 'label' => &$GLOBALS['TL_LANG']['tl_modal_archive']['show'],
                 'href'  => 'act=show',
                 'icon'  => 'show.gif',
-            ),
-        ),
-    ),
-    'palettes'    => array(
-        '__selector__' => array('customModal'),
+            ],
+        ],
+    ],
+    'palettes'    => [
+        '__selector__' => ['customModal'],
         'default'      => '{general_legend},title;{expert_legend},customModal;',
-    ),
-    'subpalettes' => array(
+    ],
+    'subpalettes' => [
         'customModal' => 'modal',
-    ),
-    'fields'      => array(
-        'id'          => array(
+    ],
+    'fields'      => [
+        'id'          => [
             'sql' => "int(10) unsigned NOT NULL auto_increment",
-        ),
-        'tstamp'      => array(
+        ],
+        'tstamp'      => [
             'label' => &$GLOBALS['TL_LANG']['tl_modal_archive']['tstamp'],
             'sql'   => "int(10) unsigned NOT NULL default '0'",
-        ),
-        'dateAdded'   => array(
+        ],
+        'dateAdded'   => [
             'label'   => &$GLOBALS['TL_LANG']['MSC']['dateAdded'],
             'sorting' => true,
             'flag'    => 6,
-            'eval'    => array('rgxp' => 'datim', 'doNotCopy' => true),
+            'eval'    => ['rgxp' => 'datim', 'doNotCopy' => true],
             'sql'     => "int(10) unsigned NOT NULL default '0'",
-        ),
-        'title'       => array(
+        ],
+        'title'       => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal_archive']['title'],
             'exclude'   => true,
             'search'    => true,
             'sorting'   => true,
             'flag'      => 1,
             'inputType' => 'text',
-            'eval'      => array('mandatory' => true, 'tl_class' => 'w50'),
+            'eval'      => ['mandatory' => true, 'tl_class' => 'w50'],
             'sql'       => "varchar(255) NOT NULL default ''",
-        ),
-        'customModal' => array(
+        ],
+        'customModal' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal_archive']['customModal'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'      => array('submitOnChange' => true),
+            'eval'      => ['submitOnChange' => true],
             'sql'       => "char(1) NOT NULL default ''",
-        ),
-        'modal'       => array(
+        ],
+        'modal'       => [
             'label'            => &$GLOBALS['TL_LANG']['tl_modal_archive']['modal'],
             'exclude'          => true,
             'inputType'        => 'select',
-            'options_callback' => array('HeimrichHannot\Modal\Backend\LayoutBackend', 'getModalOptions'),
+            'options_callback' => ['HeimrichHannot\Modal\Backend\LayoutBackend', 'getModalOptions'],
             'reference'        => &$GLOBALS['TL_LANG']['modals'],
-            'eval'             => array('includeBlankOption' => true, 'mandatory' => true),
+            'eval'             => ['includeBlankOption' => true, 'mandatory' => true],
             'sql'              => "varchar(64) NOT NULL default ''",
-        ),
-    ),
-);
+        ],
+    ],
+];
 
 class tl_modal_archive extends \Backend
 {
@@ -135,19 +135,19 @@ class tl_modal_archive extends \Backend
         }
 
         // Set root IDs
-        if (!is_array($objUser->s) || empty($objUser->s))
+        if (!is_array($objUser->modals) || empty($objUser->modals))
         {
-            $root = array(0);
+            $root = [0];
         }
         else
         {
-            $root = $objUser->s;
+            $root = $objUser->modals;
         }
 
         $GLOBALS['TL_DCA']['tl_modal_archive']['list']['sorting']['root'] = $root;
 
         // Check permissions to add archives
-        if (!$objUser->hasAccess('create', 'p'))
+        if (!$objUser->hasAccess('create', 'modalp'))
         {
             $GLOBALS['TL_DCA']['tl_modal_archive']['config']['closed'] = true;
         }
@@ -171,36 +171,36 @@ class tl_modal_archive extends \Backend
                         // Add permissions on user level
                         if ($objUser->inherit == 'custom' || !$objUser->groups[0])
                         {
-                            $objUser = $objDatabase->prepare("SELECT s, p FROM tl_user WHERE id=?")->limit(1)->execute($objUser->id);
+                            $objUser = $objDatabase->prepare("SELECT modals, modalp FROM tl_user WHERE id=?")->limit(1)->execute($objUser->id);
 
-                            $arrModulep = deserialize($objUser->p);
+                            $arrModulep = deserialize($objUser->modalp);
 
                             if (is_array($arrModulep) && in_array('create', $arrModulep))
                             {
-                                $arrModules   = deserialize($objUser->s);
+                                $arrModules   = deserialize($objUser->modals);
                                 $arrModules[] = \Input::get('id');
 
-                                $objDatabase->prepare("UPDATE tl_user SET s=? WHERE id=?")->execute(serialize($arrModules), $objUser->id);
+                                $objDatabase->prepare("UPDATE tl_user SET modals=? WHERE id=?")->execute(serialize($arrModules), $objUser->id);
                             }
                         } // Add permissions on group level
                         elseif ($objUser->groups[0] > 0)
                         {
-                            $objGroup = $objDatabase->prepare("SELECT s, p FROM tl_user_group WHERE id=?")->limit(1)->execute($objUser->groups[0]);
+                            $objGroup = $objDatabase->prepare("SELECT modals, modalp FROM tl_user_group WHERE id=?")->limit(1)->execute($objUser->groups[0]);
 
-                            $arrModulep = deserialize($objGroup->p);
+                            $arrModulep = deserialize($objGroup->modalp);
 
                             if (is_array($arrModulep) && in_array('create', $arrModulep))
                             {
-                                $arrModules   = deserialize($objGroup->s);
+                                $arrModules   = deserialize($objGroup->modals);
                                 $arrModules[] = \Input::get('id');
 
-                                $objDatabase->prepare("UPDATE tl_user_group SET s=? WHERE id=?")->execute(serialize($arrModules), $objUser->groups[0]);
+                                $objDatabase->prepare("UPDATE tl_user_group SET modals=? WHERE id=?")->execute(serialize($arrModules), $objUser->groups[0]);
                             }
                         }
 
                         // Add new element to the user object
                         $root[]     = \Input::get('id');
-                        $objUser->s = $root;
+                        $objUser->modals = $root;
                     }
                 }
             // No break;
@@ -208,7 +208,7 @@ class tl_modal_archive extends \Backend
             case 'copy':
             case 'delete':
             case 'show':
-                if (!in_array(\Input::get('id'), $root) || (\Input::get('act') == 'delete' && !$objUser->hasAccess('delete', 'p')))
+                if (!in_array(\Input::get('id'), $root) || (\Input::get('act') == 'delete' && !$objUser->hasAccess('delete', 'modalp')))
                 {
                     $this->log('Not enough permissions to ' . \Input::get('act') . ' modal_archive ID "' . \Input::get('id') . '"', __METHOD__, TL_ERROR);
                     $this->redirect('contao/main.php?act=error');
@@ -219,9 +219,9 @@ class tl_modal_archive extends \Backend
             case 'deleteAll':
             case 'overrideAll':
                 $session = $objSession->getData();
-                if (\Input::get('act') == 'deleteAll' && !$objUser->hasAccess('delete', 'p'))
+                if (\Input::get('act') == 'deleteAll' && !$objUser->hasAccess('delete', 'modalp'))
                 {
-                    $session['CURRENT']['IDS'] = array();
+                    $session['CURRENT']['IDS'] = [];
                 }
                 else
                 {
@@ -254,14 +254,14 @@ class tl_modal_archive extends \Backend
 
     public function copyArchive($row, $href, $label, $title, $icon, $attributes)
     {
-        return \BackendUser::getInstance()->hasAccess('create', 'p') ? '<a href="' . $this->addToUrl($href . '&amp;id=' . $row['id']) . '" title="'
+        return \BackendUser::getInstance()->hasAccess('create', 'modalp') ? '<a href="' . $this->addToUrl($href . '&amp;id=' . $row['id']) . '" title="'
                                                                        . specialchars($title) . '"' . $attributes . '>' . Image::getHtml($icon, $label)
                                                                        . '</a> ' : \Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)) . ' ';
     }
 
     public function deleteArchive($row, $href, $label, $title, $icon, $attributes)
     {
-        return \BackendUser::getInstance()->hasAccess('delete', 'p') ? '<a href="' . $this->addToUrl($href . '&amp;id=' . $row['id']) . '" title="'
+        return \BackendUser::getInstance()->hasAccess('delete', 'modalp') ? '<a href="' . $this->addToUrl($href . '&amp;id=' . $row['id']) . '" title="'
                                                                        . specialchars($title) . '"' . $attributes . '>' . Image::getHtml($icon, $label)
                                                                        . '</a> ' : \Image::getHtml(preg_replace('/\.gif$/i', '_.gif', $icon)) . ' ';
     }

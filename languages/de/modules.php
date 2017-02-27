@@ -3,4 +3,4 @@
 /**
  * Backend modules
  */
-$GLOBALS['TL_LANG']['MOD']['modal'] = array('Modals', '');
+$GLOBALS['TL_LANG']['MOD']['modal'] = ['Modals', ''];

@@ -8,11 +8,11 @@ $dc = &$GLOBALS['TL_DCA']['tl_content'];
 if (Input::get('do') == 'modal')
 {
     $dc['config']['ptable']                                = 'tl_modal';
-    $dc['config']['onload_callback'][]                     = array('tl_content_modal', 'checkPermission');
-    $dc['list']['operations']['toggle']['button_callback'] = array('tl_content_modal', 'toggleIcon');
+    $dc['config']['onload_callback'][]                     = ['tl_content_modal', 'checkPermission'];
+    $dc['list']['operations']['toggle']['button_callback'] = ['tl_content_modal', 'toggleIcon'];
 }
 
-$dc['config']['onload_callback'][] = array('tl_content_modal', 'modifyPalette');
+$dc['config']['onload_callback'][] = ['tl_content_modal', 'modifyPalette'];
 
 /**
  * Subpalettes
@@ -22,19 +22,19 @@ $dc['subpalettes']['source_modal'] = 'modal,jumpTo,target';
 /**
  * Fields
  */
-$arrFields = array(
-    'modal' => array(
+$arrFields = [
+    'modal' => [
         'label'            => &$GLOBALS['TL_LANG']['tl_content']['modal'],
         'exclude'          => true,
         'search'           => true,
         'inputType'        => 'select',
         'foreignKey'       => 'tl_modal.title',
-        'options_callback' => array('HeimrichHannot\Modal\Backend\ContentBackend', 'getModalOptions'),
-        'eval'             => array('tl_class' => 'w50 clr', 'mandatory' => true, 'includeBlankOption' => true, 'chosen' => true),
+        'options_callback' => ['HeimrichHannot\Modal\Backend\ContentBackend', 'getModalOptions'],
+        'eval'             => ['tl_class' => 'w50 clr', 'mandatory' => true, 'includeBlankOption' => true, 'chosen' => true],
         'sql'              => "int(10) unsigned NOT NULL default '0'",
-        'relation'         => array('type' => 'belongsTo', 'load' => 'lazy'),
-    ),
-);
+        'relation'         => ['type' => 'belongsTo', 'load' => 'lazy'],
+    ],
+];
 
 $dc['fields'] = array_merge($dc['fields'], $arrFields);
 
@@ -80,7 +80,7 @@ class tl_content_modal extends Backend
         // Set the root IDs
         if (!is_array($this->User->modals) || empty($this->User->modals))
         {
-            $root = array(0);
+            $root = [0];
         }
         else
         {

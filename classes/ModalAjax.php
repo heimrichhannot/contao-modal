@@ -47,7 +47,7 @@ class ModalAjax
      *
      * @throws \Exception
      */
-    public function __construct(ModalModel $objModal, array $arrConfig = array(), $html = '')
+    public function __construct(ModalModel $objModal, array $arrConfig = [], $html = '')
     {
         $this->arrConfig = $arrConfig;
         $this->objModal  = $objModal;
@@ -63,7 +63,7 @@ class ModalAjax
         $objModal = new Modal($this->objModal, $this->arrConfig);
         $objModal->setBackLink($back);
         $objResponse = new ResponseSuccess();
-        $objResponse->setResult(new ResponseData($objModal->generate(), array('id' => $this->objModal->id)));
+        $objResponse->setResult(new ResponseData($objModal->generate(), ['id' => $this->objModal->id]));
         $objResponse->setUrl(AjaxAction::removeAjaxParametersFromUrl(Request::getInstance()->getRequestUri()));
 
         return $objResponse;

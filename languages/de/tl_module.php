@@ -13,7 +13,7 @@ $arrLang = &$GLOBALS['TL_LANG']['tl_module'];
 /**
  * Fields
  */
-$arrLang['useModal'] = array('Elemente im Modalfenstern anzeigen', 'Wählen Sie diese Option, wenn die Elemente im Modalfenstern angezeigt werden sollen.');
+$arrLang['useModal'] = ['Elemente im Modalfenstern anzeigen', 'Wählen Sie diese Option, wenn die Elemente im Modalfenstern angezeigt werden sollen.'];
 
 /**
  * Legends

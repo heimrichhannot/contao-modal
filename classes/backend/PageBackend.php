@@ -24,7 +24,7 @@ class PageBackend extends \Backend
      */
     public function getModalOptions(\DataContainer $dc)
     {
-        $arrOptions = array();
+        $arrOptions = [];
 
         $objModal = ModalModel::findAll();
 

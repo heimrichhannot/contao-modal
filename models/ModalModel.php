@@ -15,7 +15,7 @@ class ModalModel extends \Model
      *
      * @return static The ModalModel or null if there are no modals
      */
-    public static function findPublishedByIdOrAliasWithoutLinkedPage($varId, array $arrOptions = array())
+    public static function findPublishedByIdOrAliasWithoutLinkedPage($varId, array $arrOptions = [])
     {
         $objLinkedPages = PageModel::findAllPublishedLinkedWithModal();
 
@@ -26,7 +26,7 @@ class ModalModel extends \Model
 
         $t = static::$strTable;
 
-        $arrColumns = array("($t.id=? OR $t.alias=?)");
+        $arrColumns = ["($t.id=? OR $t.alias=?)"];
 
         $arrColumns[] = 'NOT ' . \Database::getInstance()->findInSet("$t.id", $objLinkedPages->fetchEach('modal'));
 
@@ -36,7 +36,7 @@ class ModalModel extends \Model
             $arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
         }
 
-        return static::findBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
+        return static::findBy($arrColumns, [(is_numeric($varId) ? $varId : 0), $varId], $arrOptions);
     }
 
     /**
@@ -47,10 +47,10 @@ class ModalModel extends \Model
      *
      * @return static The ModalModel or null if there are no modals
      */
-    public static function findPublishedByIdOrAlias($varId, array $arrOptions = array())
+    public static function findPublishedByIdOrAlias($varId, array $arrOptions = [])
     {
         $t          = static::$strTable;
-        $arrColumns = array("($t.id=? OR $t.alias=?)");
+        $arrColumns = ["($t.id=? OR $t.alias=?)"];
 
         if (!BE_USER_LOGGED_IN)
         {
@@ -58,6 +58,6 @@ class ModalModel extends \Model
             $arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
         }
 
-        return static::findBy($arrColumns, array((is_numeric($varId) ? $varId : 0), $varId), $arrOptions);
+        return static::findBy($arrColumns, [(is_numeric($varId) ? $varId : 0), $varId], $arrOptions);
     }
 }

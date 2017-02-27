@@ -13,8 +13,8 @@ $arrLang = &$GLOBALS['TL_LANG']['tl_content'];
 /**
  * Fields
  */
-$arrLang['modal']       = array('Modal', 'Wählen Sie das Modal aus, dass bei Aufruf des Links angezeigt werden soll.');
-$arrLang['modalJumpTo'] = array('Weiterleitungsseite', 'Wählen eine Seite aus, auf die weitergeleitet werden soll, bevor das Modalfenster aufgerufen wird.');
+$arrLang['modal']       = ['Modal', 'Wählen Sie das Modal aus, dass bei Aufruf des Links angezeigt werden soll.'];
+$arrLang['modalJumpTo'] = ['Weiterleitungsseite', 'Wählen eine Seite aus, auf die weitergeleitet werden soll, bevor das Modalfenster aufgerufen wird.'];
 
 /**
  * Reference

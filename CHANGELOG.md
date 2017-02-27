@@ -1,5 +1,10 @@
-# Change Log
+# Changelog
 All notable changes to this project will be documented in this file.
+
+## [1.2.9] - 2017-02-27
+
+### Fixed
+- permission bug
 
 ## [1.2.8] - 2016-12-14
 

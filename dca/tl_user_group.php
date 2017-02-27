@@ -10,21 +10,21 @@ $GLOBALS['TL_DCA']['tl_user_group']['palettes']['default'] =
 /**
  * Add fields to tl_user_group
  */
-$GLOBALS['TL_DCA']['tl_user_group']['fields']['modals'] = array(
+$GLOBALS['TL_DCA']['tl_user_group']['fields']['modals'] = [
     'label'      => &$GLOBALS['TL_LANG']['tl_user']['modals'],
     'exclude'    => true,
     'inputType'  => 'checkbox',
     'foreignKey' => 'tl_modal_archive.title',
-    'eval'       => array('multiple' => true),
+    'eval'       => ['multiple' => true],
     'sql'        => "blob NULL",
-);
+];
 
-$GLOBALS['TL_DCA']['tl_user_group']['fields']['modalp'] = array(
+$GLOBALS['TL_DCA']['tl_user_group']['fields']['modalp'] = [
     'label'     => &$GLOBALS['TL_LANG']['tl_user']['modalp'],
     'exclude'   => true,
     'inputType' => 'checkbox',
-    'options'   => array('create', 'delete'),
+    'options'   => ['create', 'delete'],
     'reference' => &$GLOBALS['TL_LANG']['MSC'],
-    'eval'      => array('multiple' => true),
+    'eval'      => ['multiple' => true],
     'sql'       => "blob NULL",
-);
+];

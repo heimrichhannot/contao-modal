@@ -1,250 +1,250 @@
 <?php
 
-$GLOBALS['TL_DCA']['tl_modal'] = array(
-    'config'      => array(
+$GLOBALS['TL_DCA']['tl_modal'] = [
+    'config'      => [
         'dataContainer'     => 'Table',
         'ptable'            => 'tl_modal_archive',
-        'ctable'            => array('tl_content'),
+        'ctable'            => ['tl_content'],
         'enableVersioning'  => true,
-        'onload_callback'   => array(
-            array('tl_modal', 'checkPermission'),
-        ),
-        'onsubmit_callback' => array(
-            array('HeimrichHannot\Haste\Dca\General', 'setDateAdded'),
-        ),
-        'sql'               => array(
-            'keys' => array(
+        'onload_callback'   => [
+            ['tl_modal', 'checkPermission'],
+        ],
+        'onsubmit_callback' => [
+            ['HeimrichHannot\Haste\Dca\General', 'setDateAdded'],
+        ],
+        'sql'               => [
+            'keys' => [
                 'id'                       => 'primary',
                 'pid,start,stop,published' => 'index',
-            ),
-        ),
-    ),
-    'list'        => array(
-        'label'             => array(
-            'fields' => array('id'),
+            ],
+        ],
+    ],
+    'list'        => [
+        'label'             => [
+            'fields' => ['id'],
             'format' => '%s',
-        ),
-        'sorting'           => array(
+        ],
+        'sorting'           => [
             'mode'                  => 4,
-            'fields'                => array('title'),
-            'headerFields'          => array('title', 'tstamp'),
+            'fields'                => ['title'],
+            'headerFields'          => ['title', 'tstamp'],
             'panelLayout'           => 'filter;search,limit',
-            'child_record_callback' => array('tl_modal', 'listChildren'),
-        ),
-        'global_operations' => array(
-            'all' => array(
+            'child_record_callback' => ['tl_modal', 'listChildren'],
+        ],
+        'global_operations' => [
+            'all' => [
                 'label'      => &$GLOBALS['TL_LANG']['MSC']['all'],
                 'href'       => 'act=select',
                 'class'      => 'header_edit_all',
                 'attributes' => 'onclick="Backend.getScrollOffset();"',
-            ),
-        ),
-        'operations'        => array(
-            'edit'       => array(
+            ],
+        ],
+        'operations'        => [
+            'edit'       => [
                 'label' => &$GLOBALS['TL_LANG']['tl_modal']['edit'],
                 'href'  => 'table=tl_content',
                 'icon'  => 'edit.gif',
-            ),
-            'editheader' => array(
+            ],
+            'editheader' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_modal']['editmeta'],
                 'href'  => 'act=edit',
                 'icon'  => 'header.gif',
-            ),
-            'copy'       => array(
+            ],
+            'copy'       => [
                 'label' => &$GLOBALS['TL_LANG']['tl_modal']['copy'],
                 'href'  => 'act=copy',
                 'icon'  => 'copy.gif',
-            ),
-            'delete'     => array(
+            ],
+            'delete'     => [
                 'label'      => &$GLOBALS['TL_LANG']['tl_modal']['delete'],
                 'href'       => 'act=delete',
                 'icon'       => 'delete.gif',
                 'attributes' => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
-            ),
-            'toggle'     => array(
+            ],
+            'toggle'     => [
                 'label'           => &$GLOBALS['TL_LANG']['tl_modal']['toggle'],
                 'icon'            => 'visible.gif',
                 'attributes'      => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-                'button_callback' => array('tl_modal', 'toggleIcon'),
-            ),
-            'show'       => array(
+                'button_callback' => ['tl_modal', 'toggleIcon'],
+            ],
+            'show'       => [
                 'label' => &$GLOBALS['TL_LANG']['tl_modal']['show'],
                 'href'  => 'act=show',
                 'icon'  => 'show.gif',
-            ),
-        ),
-    ),
-    'palettes'    => array(
-        '__selector__' => array('customModal', 'customHeader', 'addFooter', 'published'),
+            ],
+        ],
+    ],
+    'palettes'    => [
+        '__selector__' => ['customModal', 'customHeader', 'addFooter', 'published'],
         'default'      => '{general_legend},title,alias;{header_legend},headline,usePageTitle,customHeader;{footer_legend},addFooter;{expert_legend},customModal,autoItemMode,removeCloseButton,staticBackdrop,disableKeyboard;{publish_legend},published;',
-    ),
-    'subpalettes' => array(
+    ],
+    'subpalettes' => [
         'published'    => 'start,stop',
         'customModal'  => 'modal',
         'customHeader' => 'header',
         'addFooter'    => 'footer',
-    ),
-    'fields'      => array(
-        'id'           => array(
+    ],
+    'fields'      => [
+        'id'           => [
             'sql' => "int(10) unsigned NOT NULL auto_increment",
-        ),
-        'pid'          => array(
+        ],
+        'pid'          => [
             'foreignKey' => 'tl_modal_archive.title',
             'sql'        => "int(10) unsigned NOT NULL default '0'",
-            'relation'   => array('type' => 'belongsTo', 'load' => 'eager'),
-        ),
-        'tstamp'       => array(
+            'relation'   => ['type' => 'belongsTo', 'load' => 'eager'],
+        ],
+        'tstamp'       => [
             'label' => &$GLOBALS['TL_LANG']['tl_modal']['tstamp'],
             'sql'   => "int(10) unsigned NOT NULL default '0'",
-        ),
-        'dateAdded'    => array(
+        ],
+        'dateAdded'    => [
             'label'   => &$GLOBALS['TL_LANG']['MSC']['dateAdded'],
             'sorting' => true,
             'flag'    => 6,
-            'eval'    => array('rgxp' => 'datim', 'doNotCopy' => true),
+            'eval'    => ['rgxp' => 'datim', 'doNotCopy' => true],
             'sql'     => "int(10) unsigned NOT NULL default '0'",
-        ),
-        'title'        => array(
+        ],
+        'title'        => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['title'],
             'exclude'   => true,
             'search'    => true,
             'sorting'   => true,
             'flag'      => 1,
             'inputType' => 'text',
-            'eval'      => array('mandatory' => true, 'tl_class' => 'w50'),
+            'eval'      => ['mandatory' => true, 'tl_class' => 'w50'],
             'sql'       => "varchar(255) NOT NULL default ''",
-        ),
-        'usePageTitle' => array(
+        ],
+        'usePageTitle' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['usePageTitle'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
             'sql'       => "char(1) NOT NULL default ''",
-        ),
-        'alias'        => array(
+        ],
+        'alias'        => [
             'label'         => &$GLOBALS['TL_LANG']['tl_modal']['alias'],
             'exclude'       => true,
             'inputType'     => 'text',
             'search'        => true,
-            'eval'          => array('rgxp' => 'folderalias', 'doNotCopy' => true, 'maxlength' => 128, 'tl_class' => 'w50'),
-            'save_callback' => array(
-                array('tl_modal', 'generateAlias'),
-            ),
+            'eval'          => ['rgxp' => 'folderalias', 'doNotCopy' => true, 'maxlength' => 128, 'tl_class' => 'w50'],
+            'save_callback' => [
+                ['tl_modal', 'generateAlias'],
+            ],
             'sql'           => "varchar(128) COLLATE utf8_bin NOT NULL default ''",
-        ),
-        'modal'        => array(
+        ],
+        'modal'        => [
             'label'            => &$GLOBALS['TL_LANG']['tl_modal']['modal'],
             'exclude'          => true,
             'inputType'        => 'select',
-            'options_callback' => array('HeimrichHannot\Modal\Backend\LayoutBackend', 'getModalOptions'),
+            'options_callback' => ['HeimrichHannot\Modal\Backend\LayoutBackend', 'getModalOptions'],
             'reference'        => &$GLOBALS['TL_LANG']['modals'],
-            'eval'             => array('includeBlankOption' => true, 'mandatory' => true),
+            'eval'             => ['includeBlankOption' => true, 'mandatory' => true],
             'sql'              => "varchar(64) NOT NULL default ''",
-        ),
-        'headline'     => array(
+        ],
+        'headline'     => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['headline'],
             'exclude'   => true,
             'search'    => true,
             'inputType' => 'inputUnit',
-            'options'   => array('h1', 'h2', 'h3', 'h4', 'h5', 'h6'),
-            'eval'      => array('maxlength' => 200, 'tl_class' => 'w50'),
+            'options'   => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+            'eval'      => ['maxlength' => 200, 'tl_class' => 'w50'],
             'sql'       => "varchar(255) NOT NULL default ''",
-        ),
-        'customHeader' => array(
+        ],
+        'customHeader' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['customHeader'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'      => array('submitOnChange' => true, 'tl_class' => 'clr'),
+            'eval'      => ['submitOnChange' => true, 'tl_class' => 'clr'],
             'sql'       => "char(1) NOT NULL default ''",
-        ),
-        'header'       => array(
+        ],
+        'header'       => [
             'label'       => &$GLOBALS['TL_LANG']['tl_modal']['header'],
             'exclude'     => true,
             'search'      => true,
             'inputType'   => 'textarea',
-            'eval'        => array('mandatory' => true, 'allowHtml' => true, 'class' => 'monospace', 'rte' => 'ace|html', 'helpwizard' => true),
+            'eval'        => ['mandatory' => true, 'allowHtml' => true, 'class' => 'monospace', 'rte' => 'ace|html', 'helpwizard' => true],
             'explanation' => 'insertTags',
             'sql'         => "mediumtext NULL",
-        ),
-        'addFooter'    => array(
+        ],
+        'addFooter'    => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['addFooter'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'      => array('submitOnChange' => true),
+            'eval'      => ['submitOnChange' => true],
             'sql'       => "char(1) NOT NULL default ''",
-        ),
-        'footer'       => array(
+        ],
+        'footer'       => [
             'label'       => &$GLOBALS['TL_LANG']['tl_modal']['footer'],
             'exclude'     => true,
             'search'      => true,
             'inputType'   => 'textarea',
-            'eval'        => array('mandatory' => true, 'allowHtml' => true, 'class' => 'monospace', 'rte' => 'ace|html', 'helpwizard' => true),
+            'eval'        => ['mandatory' => true, 'allowHtml' => true, 'class' => 'monospace', 'rte' => 'ace|html', 'helpwizard' => true],
             'explanation' => 'insertTags',
             'sql'         => "mediumtext NULL",
-        ),
-        'customModal'  => array(
+        ],
+        'customModal'  => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['customModal'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'      => array('submitOnChange' => true),
+            'eval'      => ['submitOnChange' => true],
             'sql'       => "char(1) NOT NULL default ''",
-        ),
-        'autoItemMode' => array(
+        ],
+        'autoItemMode' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['autoItemMode'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'      => array('submitOnChange' => true),
+            'eval'      => ['submitOnChange' => true],
             'sql'       => "char(1) NOT NULL default ''",
-        ),
-        'removeCloseButton' => array(
+        ],
+        'removeCloseButton' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['removeCloseButton'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
             'sql'       => "char(1) NOT NULL default ''",
-        ),
-        'staticBackdrop' => array(
+        ],
+        'staticBackdrop' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['staticBackdrop'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
             'sql'       => "char(1) NOT NULL default ''",
-        ),
-        'disableKeyboard' => array(
+        ],
+        'disableKeyboard' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['disableKeyboard'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
             'sql'       => "char(1) NOT NULL default ''",
-        ),
-        'published'    => array(
+        ],
+        'published'    => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['published'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'      => array('doNotCopy' => true, 'submitOnChange' => true),
+            'eval'      => ['doNotCopy' => true, 'submitOnChange' => true],
             'sql'       => "char(1) NOT NULL default '0'",
-        ),
-        'start'        => array(
+        ],
+        'start'        => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['start'],
             'exclude'   => true,
             'inputType' => 'text',
-            'eval'      => array('rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'),
+            'eval'      => ['rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'],
             'sql'       => "varchar(10) NOT NULL default ''",
-        ),
-        'stop'         => array(
+        ],
+        'stop'         => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['stop'],
             'exclude'   => true,
             'inputType' => 'text',
-            'eval'      => array('rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'),
+            'eval'      => ['rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'],
             'sql'       => "varchar(10) NOT NULL default ''",
-        ),
-    ),
-);
+        ],
+    ],
+];
 
 
 class tl_modal extends \Backend
@@ -285,13 +285,13 @@ class tl_modal extends \Backend
         }
 
         // Set the root IDs
-        if (!is_array($objUser->s) || empty($objUser->s))
+        if (!is_array($objUser->modals) || empty($objUser->modals))
         {
-            $root = array(0);
+            $root = [0];
         }
         else
         {
-            $root = $objUser->s;
+            $root = $objUser->modals;
         }
 
         $id = strlen(Input::get('id')) ? Input::get('id') : CURRENT_ID;
