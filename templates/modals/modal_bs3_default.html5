@@ -1,4 +1,4 @@
-<div class="bs-modal modal fade in" tabindex="-1" role="dialog" data-back="<?= $this->back; ?>"
+<div class="bs-modal modal fade in" tabindex="-1" role="dialog" data-back="<?= $this->back; ?>" data-alias="<?= $this->alias; ?>"
      <?php if ($this->staticBackdrop): ?>data-backdrop="static"<?php endif; ?>
      <?php if ($this->disableKeyboard): ?>data-keyboard="false"<?php endif; ?>
 >

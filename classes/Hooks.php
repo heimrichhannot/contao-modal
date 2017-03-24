@@ -12,6 +12,14 @@ namespace HeimrichHannot\Modal;
 
 class Hooks
 {
+    public function changelanguageNavigationHook(\Terminal42\ChangeLanguage\Event\ChangelanguageNavigationEvent $event)
+    {
+        $objParameters = $event->getUrlParameterBag();
+
+        // currently no support for fallback language of modals
+        $objParameters->removeUrlAttribute('modals');
+    }
+
     public function parseArticlesHook(&$objTemplate, $arrArticle, $objModule)
     {
         if (!(($objModule->useModal && $arrArticle['source'] == 'default')))

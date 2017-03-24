@@ -24,6 +24,7 @@ $GLOBALS['TL_HOOKS']['generatePage'][]                      = ['HeimrichHannot\M
 $GLOBALS['TL_HOOKS']['replaceDynamicScriptTags'][]          = ['HeimrichHannot\Modal\ModalController', 'hookReplaceDynamicScriptTags'];
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][]                 = ['HeimrichHannot\Modal\ModalController', 'replaceModalInsertTags'];
 $GLOBALS['TL_HOOKS']['parseArticles']['modalParseArticles'] = ['HeimrichHannot\Modal\Hooks', 'parseArticlesHook'];
+$GLOBALS['TL_HOOKS']['changelanguageNavigation']['modal']   = ['HeimrichHannot\Modal\Hooks', 'changelanguageNavigationHook'];
 
 if (in_array('disclaimer', \ModuleLoader::getActive()))
 {

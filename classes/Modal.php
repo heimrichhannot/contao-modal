@@ -11,6 +11,8 @@
 namespace HeimrichHannot\Modal;
 
 
+use HeimrichHannot\Ajax\AjaxAction;
+
 class Modal extends \Frontend
 {
     const MODAL_NAME = 'modal';
@@ -69,6 +71,7 @@ class Modal extends \Frontend
         }
 
         $this->Template->class        = implode(' ', $arrClasses);
+        $this->Template->alias        = AjaxAction::removeAjaxParametersFromUrl(ModalController::generateModalUrl($this->objModel->row()));
         $this->Template->back         = $this->getBackLink();
         $this->Template->redirectBack = $this->getRedirectBack();
 
