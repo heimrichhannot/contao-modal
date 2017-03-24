@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2017-03-24
+
+## Fixed
+- set back link for ajax modals from $_GET parameter location, provided by $.ajax from window.location.href
+
 ## [1.2.10] - 2017-03-24
 
 ## Fixed

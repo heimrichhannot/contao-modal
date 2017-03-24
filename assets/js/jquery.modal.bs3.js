@@ -26,6 +26,7 @@
 
                 $.ajax({
                     url: url,
+                    data: {location: window.location.href},
                     dataType: 'json',
                     error: function (jqXHR, textStatus, errorThrown) {
                         if (jqXHR.status == 300) {

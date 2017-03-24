@@ -14,6 +14,7 @@ namespace HeimrichHannot\Modal;
 use HeimrichHannot\Ajax\AjaxAction;
 use HeimrichHannot\Ajax\Response\ResponseData;
 use HeimrichHannot\Ajax\Response\ResponseSuccess;
+use HeimrichHannot\Haste\Util\Url;
 use HeimrichHannot\Request\Request;
 
 class ModalAjax
@@ -58,13 +59,13 @@ class ModalAjax
     {
         global $objPage;
 
-        $back     = \Controller::generateFrontendUrl($objPage->row(), null, null, true);
         $blnAjax  = false;
         $objModal = new Modal($this->objModal, $this->arrConfig);
-        $objModal->setBackLink($back);
+        $objModal->setBackLink(Request::getGet('location'));
         $objResponse = new ResponseSuccess();
         $objResponse->setResult(new ResponseData($objModal->generate(), ['id' => $this->objModal->id]));
-        $objResponse->setUrl(AjaxAction::removeAjaxParametersFromUrl(Request::getInstance()->getRequestUri()));
+
+        $objResponse->setUrl(AjaxAction::removeAjaxParametersFromUrl(Url::removeQueryString(['location'], Request::getInstance()->getRequestUri())));
 
         return $objResponse;
     }
