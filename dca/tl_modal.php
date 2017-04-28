@@ -111,8 +111,8 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'sorting'   => true,
             'flag'      => 1,
             'inputType' => 'text',
-            'eval'      => ['mandatory' => true, 'tl_class' => 'w50'],
-            'sql'       => "varchar(255) NOT NULL default ''",
+            'eval'      => ['mandatory' => true, 'maxlength' => 128, 'tl_class' => 'w50'],
+            'sql'       => "varchar(128) NOT NULL default ''",
         ],
         'usePageTitle' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['usePageTitle'],
@@ -147,8 +147,8 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'search'    => true,
             'inputType' => 'inputUnit',
             'options'   => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-            'eval'      => ['maxlength' => 200, 'tl_class' => 'w50'],
-            'sql'       => "varchar(255) NOT NULL default ''",
+            'eval'      => ['maxlength' => 196, 'tl_class' => 'w50'],
+            'sql'       => "varchar(196) NOT NULL default ''",
         ],
         'customHeader' => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['customHeader'],
