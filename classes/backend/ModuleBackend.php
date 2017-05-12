@@ -19,7 +19,7 @@ class ModuleBackend extends \Backend
         $arrDca     = &$GLOBALS['TL_DCA']['tl_module'];
         $arrModules = $GLOBALS['MODAL_MODULES'];
 
-        $strSuffix = '{modal_legend},useModal;';
+        $strSuffix = ',useModal';
 
         if (!is_array($arrModules))
         {

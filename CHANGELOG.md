@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.2.14] - 2017-05-12
+
+### Changed
+- invokation of useModal field
+
 ## [1.2.13] - 2017-05-09
 
 ### Fixed
