@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.2.16] - 2017-05-12
+
+### Fixed
+- replace Inserttags within ajax modal 
+
 ## [1.2.15] - 2017-05-12
 
 ### Changed

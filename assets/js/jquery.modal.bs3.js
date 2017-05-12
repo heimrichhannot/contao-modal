@@ -11,7 +11,7 @@
             this.bindClose(true);
         },
         bindToggle: function () {
-            $('[data-toggle=modal]').on('click', function () {
+            $('body').on('click', '[data-toggle=modal]', function () {
                 var $el = $(this),
                     url = $el.attr('href');
 
