@@ -15,9 +15,17 @@
                 var $el = $(this),
                     url = $el.attr('href');
 
+                var context = HASTE_PLUS.getParameterByName('ag', url);
+
                 // support xlink:href within svg
                 if (typeof url == 'undefined') {
                     url = $el.attr('xlink:href');
+                }
+
+                // redirect non ajax links
+                if (context != 'modal') {
+                    window.location.href = url;
+                    return false;
                 }
 
                 if (typeof url == 'undefined') {

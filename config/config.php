@@ -67,10 +67,6 @@ $GLOBALS['AJAX'][\HeimrichHannot\Modal\Modal::MODAL_NAME] = [
             'arguments' => [],
             'optional'  => [],
         ],
-        'redirect' => [
-            'arguments' => [],
-            'optional'  => [],
-        ],
     ],
 ];
 

@@ -238,7 +238,6 @@ class ModalController extends \Controller
 
         $arrConfig = static::getModalConfig($objModel, $objLayout, $objPage);
 
-        Ajax::runActiveAction(Modal::MODAL_NAME, 'redirect', new ModalAjax($objModel->current(), $arrConfig));
         Ajax::runActiveAction(Modal::MODAL_NAME, 'show', new ModalAjax($objModel->current(), $arrConfig));
 
         if (empty($arrConfig))
