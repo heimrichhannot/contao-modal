@@ -17,6 +17,13 @@
 
                 var context = HASTE_PLUS.getParameterByName('ag', url);
 
+
+                // calendar_plus, news_plus deprecated old modal window behavior, will be removed in future
+                if($el.data('event') == 'modal' || $el.data('news') == 'modal' )
+                {
+                    return;
+                }
+
                 // support xlink:href within svg
                 if (typeof url == 'undefined') {
                     url = $el.attr('xlink:href');

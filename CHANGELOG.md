@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.2.17] - 2017-05-16
+
+### Fixed
+- old `heimrichhannot/contao-calendar_plus`, `heimrichhannot/contao-news_plus` modal behavior restored 
+
 ## [1.2.16] - 2017-05-12
 
 ### Fixed
