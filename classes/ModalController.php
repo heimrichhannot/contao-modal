@@ -52,7 +52,7 @@ class ModalController extends \Controller
                 $arrRowOverride = null;
 
                 // set auto_item
-                if($params[4])
+                if (isset($params[4]))
                 {
                     $arrRowOverride = is_numeric($params[4]) ? ['id' => $params[4]] : ['alias' => $params[4]];
                 }
@@ -70,7 +70,7 @@ class ModalController extends \Controller
                 $arrRowOverride = null;
 
                 // set auto_item
-                if($params[3])
+                if (isset($params[3]))
                 {
                     $arrRowOverride = is_numeric($params[3]) ? ['id' => $params[3]] : ['alias' => $params[3]];
                 }
@@ -115,7 +115,7 @@ class ModalController extends \Controller
                 $arrRow = $objModal->row();
 
                 // set auto_item
-                if($params[3])
+                if (isset($params[3]))
                 {
                     $arrRow = is_numeric($params[3]) ? ['id' => $params[3]] : ['alias' => $params[3]];
                 }
