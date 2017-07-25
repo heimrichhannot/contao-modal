@@ -19,6 +19,8 @@ class ModalLink extends Modal
 
     protected $jumpTo;
 
+    protected $arrRowOverride = [];
+
     public function __construct(\Model $objModel, array $arrConfig)
     {
         parent::__construct($objModel, $arrConfig);
@@ -41,7 +43,14 @@ class ModalLink extends Modal
 
     protected function compile()
     {
-        $this->Template->href           = ModalController::generateModalUrl($this->objModel->row(), $this->getJumpTo());
+        $arrRow = $this->objModel->row();
+
+        if (!empty($this->arrRowOverride))
+        {
+            $arrRow = $this->arrRowOverride;
+        }
+
+        $this->Template->href           = ModalController::generateModalUrl($arrRow, $this->getJumpTo());
         $this->Template->link           = $this->getLinkText();
         $this->Template->linkAttributes = $this->getLinkAttributes(true);
         $this->Template->linkTitle      = $this->title;
@@ -128,5 +137,19 @@ class ModalLink extends Modal
         $this->jumpTo = $jumpTo;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRowOverride()
+    {
+        return $this->arrRowOverride;
+    }
 
+    /**
+     * @param mixed $arrRowOverride
+     */
+    public function setRowOverride($arrRowOverride)
+    {
+        $this->arrRowOverride = $arrRowOverride;
+    }
 }

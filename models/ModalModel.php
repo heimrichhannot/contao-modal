@@ -2,6 +2,8 @@
 
 namespace HeimrichHannot\Modal;
 
+use HeimrichHannot\Haste\Dca\General;
+
 class ModalModel extends \Model
 {
 
@@ -59,5 +61,15 @@ class ModalModel extends \Model
         }
 
         return static::findBy($arrColumns, [(is_numeric($varId) ? $varId : 0), $varId], $arrOptions);
+    }
+
+    public static function findPublishedByTargetPage($varPage)
+    {
+        if (($objPage = General::getModelInstanceIfId($varPage, 'tl_page')) !== null && $objPage->linkModal && $objPage->modal)
+        {
+            return static::findPublishedByIdOrAlias($objPage->modal);
+        }
+
+        return false;
     }
 }

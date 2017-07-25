@@ -49,7 +49,15 @@ class ModalController extends \Controller
                     return '';
                 }
 
-                return static::generateModalLink($objModal->current(), $params[2], $params[3]);
+                $arrRowOverride = null;
+
+                // set auto_item
+                if($params[4])
+                {
+                    $arrRowOverride = is_numeric($params[4]) ? ['id' => $params[4]] : ['alias' => $params[4]];
+                }
+
+                return static::generateModalLink($objModal->current(), $params[2], $params[3], $arrRowOverride);
                 break;
             case 'modal_link_open':
                 $objModal = ModalModel::findPublishedByIdOrAlias($params[1]);
@@ -59,7 +67,15 @@ class ModalController extends \Controller
                     return '';
                 }
 
-                $strBuffer = static::generateModalLink($objModal->current(), $params[2], '');
+                $arrRowOverride = null;
+
+                // set auto_item
+                if($params[3])
+                {
+                    $arrRowOverride = is_numeric($params[3]) ? ['id' => $params[3]] : ['alias' => $params[3]];
+                }
+
+                $strBuffer = static::generateModalLink($objModal->current(), $params[2], '', $arrRowOverride);
                 preg_match('/(?P<start>.*<a[^<]+[^<]+ *[^\/?]>)(?P<stop>.*)/is', $strBuffer, $matches);
 
                 if (is_array($matches) && isset($matches['start']) && isset($matches['stop']))
@@ -96,7 +112,15 @@ class ModalController extends \Controller
                     return '';
                 }
 
-                return static::generateModalUrl($objModal->row(), $params[2]);
+                $arrRow = $objModal->row();
+
+                // set auto_item
+                if($params[3])
+                {
+                    $arrRow = is_numeric($params[3]) ? ['id' => $params[3]] : ['alias' => $params[3]];
+                }
+
+                return static::generateModalUrl($arrRow, $params[2]);
                 break;
         }
     }
@@ -319,9 +343,9 @@ class ModalController extends \Controller
      *
      * @return string
      */
-    public static function generateModalLink(\Model $objModal, $jumpTo = null, $linkText = null)
+    public static function generateModalLink(ModalModel $objModal, $jumpTo = null, $linkText = null, $arrRowOverride = null)
     {
-        $arrConfig = static::getModalConfig($objModal);
+        $arrConfig = static::getModalConfig($objModal, null);
 
         if (!is_array($arrConfig))
         {
@@ -330,6 +354,7 @@ class ModalController extends \Controller
 
         $objLink = new ModalLink($objModal, $arrConfig);
         $objLink->setJumpTo($jumpTo);
+        $objLink->setRowOverride($arrRowOverride);
 
         if ($linkText !== null)
         {

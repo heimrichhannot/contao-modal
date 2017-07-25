@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2017-07-25
+
+### Added
+- support for auto_item for reader modules
+- link templates for bootstrap sm and lg
+
 ## [1.2.18] - 2017-06-08
 
 ### Fixed

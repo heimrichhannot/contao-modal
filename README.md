@@ -14,12 +14,12 @@ By default it comes with Bootstrap 3 modal support.
 
 ### Insertags
 
- Insert-Tag | Description
- ---------- | ----------
-`{{modal_url::*::*::*}}` | This link will be replaced with the modal url `<a href="{{modal_url::1::home}}">Hier klicken</a>`. Replace arguments: (1st - modal alias or id, 2nd - page alias or id where jump to, 3rd - link text & title)
-`{{modal_link::*::*}}` | This link will be replaced with the modal link. Arguments: (1st - modal alias or id, 2nd - page alias or id where jump to)
-`{{modal_link_open::*::*}}` | This link will be replaced with the modal link opening tag `<a href="{{modal_url::1::home}}">`. Add your custom text next. Arguments: (1st - modal alias or id, 2nd - page alias or id where jump to)
-`{{modal_link_close::*}}` | This link will be replaced with the modal link closing tag `</a>`. Requires associated {{modal_link_open}} tag.
+ Insert-Tag | Description | Arguments
+ ---------- | ----------- | ---------
+`{{modal_url::*::*::*}}` | Returns the modal url (usage: `<a href="{{modal_url::1::home}}">Hier klicken</a>`) | 1: modal id/alias, 2: jump to page id/alias, 3: auto_item id or alias
+`{{modal_link::*::*::*::*}}` | Returns the modal link | 1: modal id/alias, 2: jump to page id/alias, 3: link text & title, 4: auto_item id or alias
+`{{modal_link_open::*::*::*}}` | Returns the modal link's opening tag (`<a href="{{modal_url::1::home}}">`). | 1: modal id/alias, 2: jump to page id/alias, 3: auto_item id or alias
+`{{modal_link_close::*}}` | Returns the modal link's closing tag (`</a>`) -> Requires associated {{modal_link_open}} tag. | 1: modal id/alias
  
  
 ### Hooks
