@@ -61,11 +61,26 @@ class ModalAjax
 
         $blnAjax  = false;
         $objModal = new Modal($this->objModal, $this->arrConfig);
-        $objModal->setBackLink(Request::getGet('location'));
+        $strLocation = html_entity_decode(Request::getGet('location'));
+        $objModal->setBackLink($strLocation);
+
+        $strUrl = AjaxAction::removeAjaxParametersFromUrl(Url::removeQueryString(['location'], Request::getInstance()->getRequestUri()));
+
+        if ($objModal->keepGetParams)
+        {
+            $arrQuery = explode('?', $strLocation);
+            $strQuery = is_array($arrQuery) && count($arrQuery) > 1 ? $arrQuery[1] : '';
+
+            if ($strQuery)
+            {
+                $strUrl = Url::addQueryString($strQuery, $strUrl);
+            }
+        }
+
         $objResponse = new ResponseSuccess();
         $objResponse->setResult(new ResponseData(\Controller::replaceInsertTags($objModal->generate(), false), ['id' => $this->objModal->id]));
 
-        $objResponse->setUrl(AjaxAction::removeAjaxParametersFromUrl(Url::removeQueryString(['location'], Request::getInstance()->getRequestUri())));
+        $objResponse->setUrl($strUrl);
 
         return $objResponse;
     }

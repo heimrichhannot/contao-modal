@@ -22,6 +22,10 @@ $arrLang['autoItemMode'] = [
     'Nur anzeigen wenn auto_item vorhanden',
     'Aktivieren um das Modul-Fenster nur anzuzeigen, wenn ein zusätzliches auto_item (z.B. Nachrichten-Leser) in der URL vorhanden ist, andernfalls wird eine 404-Meldung erzeugt.',
 ];
+$arrLang['keepGetParams'] = [
+    'GET-Parameter beibehalten',
+    'Wählen Sie diese Option, wenn beim Öffnen des Modalfensters die GET-Parameter der aktuellen Seite beibehalten werden sollen (sinnvoll bspw. bei Filter-Modulen).',
+];
 $arrLang['staticBackdrop'] = [
     'Schließen durch Mausklick verhindern',
     'Aktivieren um das Schließen des Modul-Fenster durch einen Mausklick zu unterbinden.'

@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.3.2] - 2017-07-27
+
+### Fixed
+- published field
+
+### Added
+- option for keeping GET params
+
 ## [1.3.1] - 2017-07-25
 
 ### Fixed

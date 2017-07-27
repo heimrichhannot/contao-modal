@@ -76,7 +76,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
     ],
     'palettes'    => [
         '__selector__' => ['customModal', 'customHeader', 'addFooter', 'published'],
-        'default'      => '{general_legend},title,alias;{header_legend},headline,usePageTitle,customHeader;{footer_legend},addFooter;{expert_legend},customModal,autoItemMode,removeCloseButton,staticBackdrop,disableKeyboard;{publish_legend},published;',
+        'default'      => '{general_legend},title,alias;{header_legend},headline,usePageTitle,customHeader;{footer_legend},addFooter;{expert_legend},customModal,autoItemMode,keepGetParams,removeCloseButton,staticBackdrop,disableKeyboard;{publish_legend},published;',
     ],
     'subpalettes' => [
         'published'    => 'start,stop',
@@ -119,6 +119,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
+            'eval'                    => ['tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
         'alias'        => [
@@ -138,7 +139,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'inputType'        => 'select',
             'options_callback' => ['HeimrichHannot\Modal\Backend\LayoutBackend', 'getModalOptions'],
             'reference'        => &$GLOBALS['TL_LANG']['modals'],
-            'eval'             => ['includeBlankOption' => true, 'mandatory' => true],
+            'eval'             => ['includeBlankOption' => true, 'mandatory' => true, 'tl_class' => 'w50'],
             'sql'              => "varchar(64) NOT NULL default ''",
         ],
         'headline'     => [
@@ -155,7 +156,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'      => ['submitOnChange' => true, 'tl_class' => 'clr'],
+            'eval'      => ['submitOnChange' => true, 'tl_class' => 'long clr'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
         'header'       => [
@@ -163,7 +164,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'exclude'     => true,
             'search'      => true,
             'inputType'   => 'textarea',
-            'eval'        => ['mandatory' => true, 'allowHtml' => true, 'class' => 'monospace', 'rte' => 'ace|html', 'helpwizard' => true],
+            'eval'        => ['mandatory' => true, 'allowHtml' => true, 'class' => 'monospace', 'rte' => 'ace|html', 'helpwizard' => true, 'tl_class' => 'w50'],
             'explanation' => 'insertTags',
             'sql'         => "mediumtext NULL",
         ],
@@ -172,7 +173,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'      => ['submitOnChange' => true],
+            'eval'      => ['submitOnChange' => true, 'tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
         'footer'       => [
@@ -180,7 +181,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'exclude'     => true,
             'search'      => true,
             'inputType'   => 'textarea',
-            'eval'        => ['mandatory' => true, 'allowHtml' => true, 'class' => 'monospace', 'rte' => 'ace|html', 'helpwizard' => true],
+            'eval'        => ['mandatory' => true, 'allowHtml' => true, 'class' => 'monospace', 'rte' => 'ace|html', 'helpwizard' => true, 'tl_class' => 'long clr'],
             'explanation' => 'insertTags',
             'sql'         => "mediumtext NULL",
         ],
@@ -189,7 +190,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'      => ['submitOnChange' => true],
+            'eval'      => ['submitOnChange' => true, 'tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
         'autoItemMode' => [
@@ -197,7 +198,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'      => ['submitOnChange' => true],
+            'eval'      => ['submitOnChange' => true, 'tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
         'removeCloseButton' => [
@@ -205,6 +206,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
+            'eval'                    => ['tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
         'staticBackdrop' => [
@@ -212,6 +214,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
+            'eval'                    => ['tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
         'disableKeyboard' => [
@@ -219,21 +222,29 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
+            'eval'                    => ['tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
+        ],
+        'keepGetParams' => [
+            'label'                   => &$GLOBALS['TL_LANG']['tl_modal']['keepGetParams'],
+            'exclude'                 => true,
+            'inputType'               => 'checkbox',
+            'eval'                    => ['tl_class' => 'w50'],
+            'sql'                     => "char(1) NOT NULL default ''"
         ],
         'published'    => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['published'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'      => ['doNotCopy' => true, 'submitOnChange' => true],
-            'sql'       => "char(1) NOT NULL default '0'",
+            'eval'      => ['doNotCopy' => true, 'submitOnChange' => true, 'tl_class' => 'w50'],
+            'sql'       => "char(1) NOT NULL default ''",
         ],
         'start'        => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['start'],
             'exclude'   => true,
             'inputType' => 'text',
-            'eval'      => ['rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'],
+            'eval'      => ['rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 clr wizard'],
             'sql'       => "varchar(10) NOT NULL default ''",
         ],
         'stop'         => [

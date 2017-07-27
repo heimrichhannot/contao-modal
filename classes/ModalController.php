@@ -13,6 +13,8 @@ namespace HeimrichHannot\Modal;
 use HeimrichHannot\Ajax\Ajax;
 use HeimrichHannot\Ajax\AjaxAction;
 use HeimrichHannot\Ajax\Response\Response404;
+use HeimrichHannot\Haste\Util\Url;
+use HeimrichHannot\Request\Request;
 
 class ModalController extends \Controller
 {
@@ -279,7 +281,14 @@ class ModalController extends \Controller
         $back = \Controller::generateFrontendUrl($objPage->row(), null, null, true);
 
         $objModal = new Modal($objModel, $arrConfig);
+
+        if ($objModal->keepGetParams)
+        {
+            $back = Url::addQueryString(Request::getInstance()->getQueryString(), $back);
+        }
+
         $objModal->setBackLink($back);
+
         // render modal within main, as it is the most commonly used region and enabled within contao by default
         $strBuffer = $objModal->generate();
 
