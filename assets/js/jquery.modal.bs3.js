@@ -19,7 +19,7 @@
 
 
                 // calendar_plus, news_plus deprecated old modal window behavior, will be removed in future
-                if($el.data('event') == 'modal' || $el.data('news') == 'modal' )
+                if($el.data('event') == 'modal' || $el.data('news') == 'modal' || $el.data('job') == 'modal')
                 {
                     return;
                 }

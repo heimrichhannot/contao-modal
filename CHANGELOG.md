@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.3.3] - 2017-07-31
+
+### Fixed
+- workaround for job market module
+
 ## [1.3.2] - 2017-07-27
 
 ### Fixed
