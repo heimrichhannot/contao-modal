@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.3.5] - 2017-10-11
+
+### Fixed
+- unchecked keepUrlParams not removed get params
+
 ## [1.3.4] - 2017-10-06
 
 ### Fixed

@@ -75,6 +75,9 @@ class ModalAjax
             {
                 $strUrl = Url::addQueryString($strQuery, $strUrl);
             }
+        } else
+        {
+            $strUrl = Url::removeAllParametersFromUri($strUrl);
         }
 
         $objResponse = new ResponseSuccess();
