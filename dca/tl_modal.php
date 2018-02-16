@@ -15,6 +15,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
         'sql'               => [
             'keys' => [
                 'id'                       => 'primary',
+                'alias'                    => 'index',
                 'pid,start,stop,published' => 'index',
             ],
         ],
@@ -85,26 +86,26 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
         'addFooter'    => 'footer',
     ],
     'fields'      => [
-        'id'           => [
+        'id'                => [
             'sql' => "int(10) unsigned NOT NULL auto_increment",
         ],
-        'pid'          => [
+        'pid'               => [
             'foreignKey' => 'tl_modal_archive.title',
             'sql'        => "int(10) unsigned NOT NULL default '0'",
             'relation'   => ['type' => 'belongsTo', 'load' => 'eager'],
         ],
-        'tstamp'       => [
+        'tstamp'            => [
             'label' => &$GLOBALS['TL_LANG']['tl_modal']['tstamp'],
             'sql'   => "int(10) unsigned NOT NULL default '0'",
         ],
-        'dateAdded'    => [
+        'dateAdded'         => [
             'label'   => &$GLOBALS['TL_LANG']['MSC']['dateAdded'],
             'sorting' => true,
             'flag'    => 6,
             'eval'    => ['rgxp' => 'datim', 'doNotCopy' => true],
             'sql'     => "int(10) unsigned NOT NULL default '0'",
         ],
-        'title'        => [
+        'title'             => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['title'],
             'exclude'   => true,
             'search'    => true,
@@ -114,15 +115,15 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'eval'      => ['mandatory' => true, 'maxlength' => 128, 'tl_class' => 'w50'],
             'sql'       => "varchar(128) NOT NULL default ''",
         ],
-        'usePageTitle' => [
+        'usePageTitle'      => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['usePageTitle'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'                    => ['tl_class' => 'w50'],
+            'eval'      => ['tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
-        'alias'        => [
+        'alias'             => [
             'label'         => &$GLOBALS['TL_LANG']['tl_modal']['alias'],
             'exclude'       => true,
             'inputType'     => 'text',
@@ -133,7 +134,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             ],
             'sql'           => "varchar(128) COLLATE utf8_bin NOT NULL default ''",
         ],
-        'modal'        => [
+        'modal'             => [
             'label'            => &$GLOBALS['TL_LANG']['tl_modal']['modal'],
             'exclude'          => true,
             'inputType'        => 'select',
@@ -142,7 +143,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'eval'             => ['includeBlankOption' => true, 'mandatory' => true, 'tl_class' => 'w50'],
             'sql'              => "varchar(64) NOT NULL default ''",
         ],
-        'headline'     => [
+        'headline'          => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['headline'],
             'exclude'   => true,
             'search'    => true,
@@ -151,7 +152,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'eval'      => ['maxlength' => 196, 'tl_class' => 'w50'],
             'sql'       => "varchar(196) NOT NULL default ''",
         ],
-        'customHeader' => [
+        'customHeader'      => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['customHeader'],
             'exclude'   => true,
             'filter'    => true,
@@ -159,7 +160,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'eval'      => ['submitOnChange' => true, 'tl_class' => 'long clr'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
-        'header'       => [
+        'header'            => [
             'label'       => &$GLOBALS['TL_LANG']['tl_modal']['header'],
             'exclude'     => true,
             'search'      => true,
@@ -168,7 +169,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'explanation' => 'insertTags',
             'sql'         => "mediumtext NULL",
         ],
-        'addFooter'    => [
+        'addFooter'         => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['addFooter'],
             'exclude'   => true,
             'filter'    => true,
@@ -176,7 +177,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'eval'      => ['submitOnChange' => true, 'tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
-        'footer'       => [
+        'footer'            => [
             'label'       => &$GLOBALS['TL_LANG']['tl_modal']['footer'],
             'exclude'     => true,
             'search'      => true,
@@ -185,7 +186,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'explanation' => 'insertTags',
             'sql'         => "mediumtext NULL",
         ],
-        'customModal'  => [
+        'customModal'       => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['customModal'],
             'exclude'   => true,
             'filter'    => true,
@@ -193,7 +194,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'eval'      => ['submitOnChange' => true, 'tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
-        'autoItemMode' => [
+        'autoItemMode'      => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['autoItemMode'],
             'exclude'   => true,
             'filter'    => true,
@@ -206,33 +207,33 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'                    => ['tl_class' => 'w50'],
+            'eval'      => ['tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
-        'staticBackdrop' => [
+        'staticBackdrop'    => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['staticBackdrop'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'                    => ['tl_class' => 'w50'],
+            'eval'      => ['tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
-        'disableKeyboard' => [
+        'disableKeyboard'   => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['disableKeyboard'],
             'exclude'   => true,
             'filter'    => true,
             'inputType' => 'checkbox',
-            'eval'                    => ['tl_class' => 'w50'],
+            'eval'      => ['tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
-        'keepGetParams' => [
-            'label'                   => &$GLOBALS['TL_LANG']['tl_modal']['keepGetParams'],
-            'exclude'                 => true,
-            'inputType'               => 'checkbox',
-            'eval'                    => ['tl_class' => 'w50'],
-            'sql'                     => "char(1) NOT NULL default ''"
+        'keepGetParams'     => [
+            'label'     => &$GLOBALS['TL_LANG']['tl_modal']['keepGetParams'],
+            'exclude'   => true,
+            'inputType' => 'checkbox',
+            'eval'      => ['tl_class' => 'w50'],
+            'sql'       => "char(1) NOT NULL default ''"
         ],
-        'published'    => [
+        'published'         => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['published'],
             'exclude'   => true,
             'filter'    => true,
@@ -240,14 +241,14 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'eval'      => ['doNotCopy' => true, 'submitOnChange' => true, 'tl_class' => 'w50'],
             'sql'       => "char(1) NOT NULL default ''",
         ],
-        'start'        => [
+        'start'             => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['start'],
             'exclude'   => true,
             'inputType' => 'text',
             'eval'      => ['rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 clr wizard'],
             'sql'       => "varchar(10) NOT NULL default ''",
         ],
-        'stop'         => [
+        'stop'              => [
             'label'     => &$GLOBALS['TL_LANG']['tl_modal']['stop'],
             'exclude'   => true,
             'inputType' => 'text',
@@ -263,7 +264,7 @@ class tl_modal extends \Backend
     /**
      * Auto-generate a page alias if it has not been set yet
      *
-     * @param mixed         $varValue
+     * @param mixed $varValue
      * @param DataContainer $dc
      *
      * @return string
@@ -279,9 +280,9 @@ class tl_modal extends \Backend
     public function listChildren($arrRow)
     {
         return '<div class="tl_content_left">' . ($arrRow['title'] ?: $arrRow['id']) . ' <span style="color:#b3b3b3; padding-left:3px">[' . \Date::parse(
-            Config::get('datimFormat'),
-            trim($arrRow['dateAdded'])
-        ) . ']</span></div>';
+                Config::get('datimFormat'),
+                trim($arrRow['dateAdded'])
+            ) . ']</span></div>';
     }
 
     public function checkPermission()
@@ -290,33 +291,27 @@ class tl_modal extends \Backend
         $objSession  = \Session::getInstance();
         $objDatabase = \Database::getInstance();
 
-        if ($objUser->isAdmin)
-        {
+        if ($objUser->isAdmin) {
             return;
         }
 
         // Set the root IDs
-        if (!is_array($objUser->modals) || empty($objUser->modals))
-        {
+        if (!is_array($objUser->modals) || empty($objUser->modals)) {
             $root = [0];
-        }
-        else
-        {
+        } else {
             $root = $objUser->modals;
         }
 
         $id = strlen(Input::get('id')) ? Input::get('id') : CURRENT_ID;
 
         // Check current action
-        switch (Input::get('act'))
-        {
+        switch (Input::get('act')) {
             case 'paste':
                 // Allow
                 break;
 
             case 'create':
-                if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root))
-                {
+                if (!strlen(Input::get('pid')) || !in_array(Input::get('pid'), $root)) {
                     \Controller::log(
                         'Not enough permissions to create modal items in modal archive ID "' . Input::get('pid') . '"',
                         'tl_modal checkPermission',
@@ -328,8 +323,7 @@ class tl_modal extends \Backend
 
             case 'cut':
             case 'copy':
-                if (!in_array(Input::get('pid'), $root))
-                {
+                if (!in_array(Input::get('pid'), $root)) {
                     \Controller::log(
                         'Not enough permissions to ' . Input::get('act') . ' modal item ID "' . $id . '" to modal archive ID "' . Input::get('pid') . '"',
                         'tl_modal checkPermission',
@@ -346,14 +340,12 @@ class tl_modal extends \Backend
             case 'feature':
                 $objArchive = $objDatabase->prepare("SELECT pid FROM tl_modal WHERE id=?")->limit(1)->execute($id);
 
-                if ($objArchive->numRows < 1)
-                {
+                if ($objArchive->numRows < 1) {
                     \Controller::log('Invalid modal item ID "' . $id . '"', 'tl_modal checkPermission', TL_ERROR);
                     \Controller::redirect('contao/main.php?act=error');
                 }
 
-                if (!in_array($objArchive->pid, $root))
-                {
+                if (!in_array($objArchive->pid, $root)) {
                     \Controller::log(
                         'Not enough permissions to ' . Input::get('act') . ' modal item ID "' . $id . '" of modal archive ID "' . $objArchive->pid . '"',
                         'tl_modal checkPermission',
@@ -369,16 +361,14 @@ class tl_modal extends \Backend
             case 'overrideAll':
             case 'cutAll':
             case 'copyAll':
-                if (!in_array($id, $root))
-                {
+                if (!in_array($id, $root)) {
                     \Controller::log('Not enough permissions to access modal archive ID "' . $id . '"', 'tl_modal checkPermission', TL_ERROR);
                     \Controller::redirect('contao/main.php?act=error');
                 }
 
                 $objArchive = $objDatabase->prepare("SELECT id FROM tl_modal WHERE pid=?")->execute($id);
 
-                if ($objArchive->numRows < 1)
-                {
+                if ($objArchive->numRows < 1) {
                     \Controller::log('Invalid modal archive ID "' . $id . '"', 'tl_modal checkPermission', TL_ERROR);
                     \Controller::redirect('contao/main.php?act=error');
                 }
@@ -389,13 +379,10 @@ class tl_modal extends \Backend
                 break;
 
             default:
-                if (strlen(Input::get('act')))
-                {
+                if (strlen(Input::get('act'))) {
                     \Controller::log('Invalid command "' . Input::get('act') . '"', 'tl_modal checkPermission', TL_ERROR);
                     \Controller::redirect('contao/main.php?act=error');
-                }
-                elseif (!in_array($id, $root))
-                {
+                } elseif (!in_array($id, $root)) {
                     \Controller::log('Not enough permissions to access modal archive ID ' . $id, 'tl_modal checkPermission', TL_ERROR);
                     \Controller::redirect('contao/main.php?act=error');
                 }
@@ -407,22 +394,19 @@ class tl_modal extends \Backend
     {
         $objUser = \BackendUser::getInstance();
 
-        if (strlen(Input::get('tid')))
-        {
+        if (strlen(Input::get('tid'))) {
             $this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1));
             \Controller::redirect($this->getReferer());
         }
 
         // Check permissions AFTER checking the tid, so hacking attempts are logged
-        if (!$objUser->isAdmin && !$objUser->hasAccess('tl_modal::published', 'alexf'))
-        {
+        if (!$objUser->isAdmin && !$objUser->hasAccess('tl_modal::published', 'alexf')) {
             return '';
         }
 
         $href .= '&amp;tid=' . $row['id'] . '&amp;state=' . ($row['published'] ? '' : 1);
 
-        if (!$row['published'])
-        {
+        if (!$row['published']) {
             $icon = 'invisible.gif';
         }
 
@@ -435,8 +419,7 @@ class tl_modal extends \Backend
         $objDatabase = \Database::getInstance();
 
         // Check permissions to publish
-        if (!$objUser->isAdmin && !$objUser->hasAccess('tl_modal::published', 'alexf'))
-        {
+        if (!$objUser->isAdmin && !$objUser->hasAccess('tl_modal::published', 'alexf')) {
             \Controller::log('Not enough permissions to publish/unpublish item ID "' . $intId . '"', 'tl_modal toggleVisibility', TL_ERROR);
             \Controller::redirect('contao/main.php?act=error');
         }
@@ -445,10 +428,8 @@ class tl_modal extends \Backend
         $objVersions->initialize();
 
         // Trigger the save_callback
-        if (is_array($GLOBALS['TL_DCA']['tl_modal']['fields']['published']['save_callback']))
-        {
-            foreach ($GLOBALS['TL_DCA']['tl_modal']['fields']['published']['save_callback'] as $callback)
-            {
+        if (is_array($GLOBALS['TL_DCA']['tl_modal']['fields']['published']['save_callback'])) {
+            foreach ($GLOBALS['TL_DCA']['tl_modal']['fields']['published']['save_callback'] as $callback) {
                 $this->import($callback[0]);
                 $blnVisible = $this->{$callback[0]}->{$callback[1]}($blnVisible, $this);
             }
