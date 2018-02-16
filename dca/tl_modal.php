@@ -15,6 +15,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
         'sql'               => [
             'keys' => [
                 'id'                       => 'primary',
+                'alias'                    => 'index',
                 'pid,start,stop,published' => 'index',
             ],
         ],
