@@ -1,6 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.3.8] - 2018-02-16
+
+### Fixed
+- toggleVisibility
+
+## [1.3.7] - 2018-02-16
+
+### Added
+- `tl_modal` index on `alias`
+
+### Fixed
+- insertag model caching implemented to reduce database queries
+
 ## [1.3.6] - 2017-11-24
 
 ### Fixed
