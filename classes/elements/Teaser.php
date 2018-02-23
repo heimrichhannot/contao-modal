@@ -26,7 +26,7 @@ class Teaser extends ModalController
      */
     public function generateModalTeaserLink(&$objElement, $blnShowMore)
     {
-        if ($objElement->source != 'modal' && !$objElement->modal)
+        if ($objElement->source != 'modal' || ($objElement->source == 'modal' && !$objElement->modal))
         {
             return $blnShowMore;
         }

@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.3.9] - 2018-02-23
+
+### Fixed
+- `Teaser::generateModalTeaserLink()` check if teaser is of type modal
+
 ## [1.3.8] - 2018-02-16
 
 ### Fixed
