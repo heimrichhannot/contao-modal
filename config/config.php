@@ -83,7 +83,7 @@ $GLOBALS['TL_MODALS']['bs3_default'] = [
         ],
     ],
     'js'       => [
-        'system/modules/modal/assets/js/jquery.modal.bs3.js',
+        'system/modules/modal/assets/js/jquery.modal.bs3.min.js',
     ],
 ];
 
