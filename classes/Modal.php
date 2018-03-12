@@ -11,18 +11,36 @@
 namespace HeimrichHannot\Modal;
 
 
+use Contao\LayoutModel;
 use HeimrichHannot\Ajax\AjaxAction;
 
 class Modal extends \Frontend
 {
     const MODAL_NAME = 'modal';
 
+    /**
+     * @var \Model
+     */
     protected $objModel;
 
+    /**
+     * @var LayoutModel
+     */
+    protected $objLayout;
+
+    /**
+     * @var object
+     */
     protected $objConfig;
 
+    /**
+     * @var string
+     */
     protected $backLink;
 
+    /**
+     * @var string
+     */
     protected $strTemplate;
 
     /**
@@ -32,10 +50,11 @@ class Modal extends \Frontend
      */
     protected $arrData = [];
 
-    public function __construct(\Model $objModel, array $arrConfig)
+    public function __construct(\Model $objModel, array $arrConfig, LayoutModel $objLayout)
     {
         $this->objModel  = $objModel;
         $this->objConfig = (object) $arrConfig;
+        $this->objLayout = $objLayout;
         $this->arrData   = $objModel->row();
 
         $arrHeadline       = deserialize($objModel->headline);
@@ -46,12 +65,26 @@ class Modal extends \Frontend
 
     public function generate()
     {
+        /**
+         * @var $objPage \Contao\PageModel
+         */
         global $objPage;
-
         $this->Template = new \FrontendTemplate($this->strTemplate);
         $this->Template->setData($this->arrData);
 
         $this->Template->title = ''; // title should be empty by default, use headline or pageTitle instead
+
+        $objFirstPage = PageModel::findFirstPublishedByPid($objPage->rootId);
+        $strTitle     = '{{page::rootPageTitle}}';
+
+        // add pageTitle only if not first page / front page)
+        if (null === $objFirstPage || $objFirstPage->id !== $objPage->id) {
+            $strTitle = '{{page::pageTitle}} - ' . $strTitle;
+        }
+
+        $this->objLayout->titleTag = $strTitle;
+
+        $this->Template->pageTitle = \Controller::replaceInsertTags($this->objLayout->titleTag, false); // the base page title that should be used when modal is closed, not the modal page title
 
         $arrClasses = [];
 

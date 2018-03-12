@@ -258,7 +258,7 @@ class ModalController extends \Controller
 
         $arrConfig = static::getModalConfig($objModel, $objLayout, $objPage);
 
-        Ajax::runActiveAction(Modal::MODAL_NAME, 'show', new ModalAjax($objModel->current(), $arrConfig));
+        Ajax::runActiveAction(Modal::MODAL_NAME, 'show', new ModalAjax($objModel->current(), $arrConfig, $objLayout, ''));
 
         if (empty($arrConfig)) {
             $blnCheck = false;
@@ -272,7 +272,7 @@ class ModalController extends \Controller
 
         $back = \Controller::generateFrontendUrl($objPage->row(), null, null, true);
 
-        $objModal = new Modal($objModel, $arrConfig);
+        $objModal = new Modal($objModel, $arrConfig, $objLayout);
 
         if ($objModal->keepGetParams) {
             $back = Url::addQueryString(Request::getInstance()->getQueryString(), $back);

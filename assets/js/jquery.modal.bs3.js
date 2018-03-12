@@ -5,12 +5,49 @@
             this.bindToggle();
             this.bindClose();
             this.bindPopState();
+            this.onShow();
+            this.onHide();
             $(document).ajaxComplete($.proxy(this.ajaxComplete, this));
         },
         ajaxComplete: function() {
             this.bindClose(true);
+            this.onShow();
+            this.onHide();
+        },
+        onShow: function() {
+            var $modal = $('.bs-modal'),
+                self = this;
+
+            if ($modal.length < 1) {
+                return;
+            }
+
+            $modal.on('shown.bs.modal', function(e) {
+                var title = self.getTitle();
+
+                if (typeof title !== 'undefined') {
+                    $modal.data('page-title', window.document.title);
+                    window.document.title = title;
+                }
+            });
+        },
+        onHide: function() {
+            var $modal = $('.bs-modal'),
+                self = this;
+
+            if ($modal.length < 1) {
+                return;
+            }
+
+            $modal.on('hide.bs.modal', function(e) {
+                var title = self.getPageTitle();
+                if (typeof title !== 'undefined') {
+                    window.document.title = title;
+                }
+            });
         },
         bindToggle: function() {
+            var self = this;
             $('body').on('click', '[data-toggle=modal]', function() {
                 var $el = $(this),
                     url = $el.attr('href');
@@ -55,17 +92,18 @@
                         }
 
                         if (response.result.html && response.result.data.id) {
-                            var $modal = $(response.result.html);
+                            var $html = $(response.result.html);
                             $('body').find('.bs-modal').remove();
-                            $modal.appendTo('body');
-                            $('.bs-modal').modal('show');
+                            $html.appendTo('body');
+                            var $modal = $('.bs-modal');
+                            $modal.modal('show');
                             if (typeof response.result.data.url !== 'undefined') {
                                 if (window.history && window.history.pushState) {
-                                    history.pushState({}, null, response.result.data.url);
+                                    history.pushState({}, self.getTitle(), response.result.data.url);
                                 }
                             }
                         }
-                    },
+                    }
                 });
 
                 return false;
@@ -100,6 +138,24 @@
                 $('.bs-modal').modal('hide');
             });
         },
+        getTitle: function() {
+            var $modal = $('.bs-modal');
+
+            if ($modal.length < 1) {
+                return null;
+            }
+
+            return $modal.data('title');
+        },
+        getPageTitle: function() {
+            var $modal = $('.bs-modal');
+
+            if ($modal.length < 1) {
+                return null;
+            }
+
+            return $modal.data('page-title');
+        }
     };
 
     $(function() {

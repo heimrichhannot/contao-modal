@@ -11,6 +11,7 @@
 namespace HeimrichHannot\Modal;
 
 
+use Contao\LayoutModel;
 use HeimrichHannot\Ajax\AjaxAction;
 use HeimrichHannot\Ajax\Response\ResponseData;
 use HeimrichHannot\Ajax\Response\ResponseSuccess;
@@ -41,42 +42,41 @@ class ModalAjax
     protected $html;
 
     /**
-     * Get the current action
-     *
-     * @param $objModal ModalModel
-     * @param $html     string
-     *
-     * @throws \Exception
+     * @var LayoutModel
      */
-    public function __construct(ModalModel $objModal, array $arrConfig = [], $html = '')
+    protected $objLayout;
+
+    /**
+     * ModalAjax constructor.
+     * @param ModalModel $objModal
+     * @param array $arrConfig
+     * @param LayoutModel $objLayout
+     * @param string $html
+     */
+    public function __construct(ModalModel $objModal, array $arrConfig = [], LayoutModel $objLayout, $html = '')
     {
         $this->arrConfig = $arrConfig;
         $this->objModal  = $objModal;
+        $this->objLayout = $objLayout;
         $this->html      = $html;
     }
 
     public function show()
     {
-        global $objPage;
-
-        $blnAjax  = false;
-        $objModal = new Modal($this->objModal, $this->arrConfig);
+        $objModal    = new Modal($this->objModal, $this->arrConfig, $this->objLayout);
         $strLocation = html_entity_decode(Request::getGet('location'));
         $objModal->setBackLink($strLocation);
 
         $strUrl = AjaxAction::removeAjaxParametersFromUrl(Url::removeQueryString(['location'], Request::getInstance()->getRequestUri()));
 
-        if ($objModal->keepGetParams)
-        {
+        if ($objModal->keepGetParams) {
             $arrQuery = explode('?', $strLocation);
             $strQuery = is_array($arrQuery) && count($arrQuery) > 1 ? $arrQuery[1] : '';
 
-            if ($strQuery)
-            {
+            if ($strQuery) {
                 $strUrl = Url::addQueryString($strQuery, $strUrl);
             }
-        } else
-        {
+        } else {
             $strUrl = Url::removeAllParametersFromUri($strUrl);
         }
 

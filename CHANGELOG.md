@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2018-03-12
+
+#### Changed
+- on hide/show modal set proper page title
+
 ## [1.3.10] - 2018-03-05
 
 #### Changed
