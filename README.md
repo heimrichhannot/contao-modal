@@ -28,7 +28,7 @@ Name | Arguments | Expected return value | Description
  ---------- | ---------- | ---------- | ---------
 generateModalUrl | $arrRow, $strParams, $strUrl | $strUrl | Modify the modal url.
 generateModal | $objTemplate, $objModel, $objConfig, $objModal | void | Modify the modal output.
-getModalContentElement / $strContent, $objElement, $objTemplate, $objModel, $objConfig, $objModal / $strContent / Modify the modal within content element.
+getModalContentElement  $strContent, $objElement, $objTemplate, $objModel, $objConfig, $objModal | $strContent | Modify the modal within content element.
 
 ### Register custom modules to make usage of modal
 
