@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2018-06-21
+
+#### Added
+* option to add get parameter from current url to modal url
+
 ## [1.4.1] - 2018-03-26
 
 #### Changed

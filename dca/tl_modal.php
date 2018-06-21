@@ -77,7 +77,7 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
     ],
     'palettes'    => [
         '__selector__' => ['customModal', 'customHeader', 'addFooter', 'published'],
-        'default'      => '{general_legend},title,alias;{header_legend},headline,usePageTitle,customHeader;{footer_legend},addFooter;{expert_legend},customModal,autoItemMode,keepGetParams,removeCloseButton,staticBackdrop,disableKeyboard;{publish_legend},published;',
+        'default'      => '{general_legend},title,alias;{header_legend},headline,usePageTitle,customHeader;{footer_legend},addFooter;{url_legend},addGetParamsToUrl;{expert_legend},customModal,autoItemMode,keepGetParams,removeCloseButton,staticBackdrop,disableKeyboard;{publish_legend},published;',
     ],
     'subpalettes' => [
         'published'    => 'start,stop',
@@ -255,6 +255,13 @@ $GLOBALS['TL_DCA']['tl_modal'] = [
             'eval'      => ['rgxp' => 'datim', 'datepicker' => true, 'tl_class' => 'w50 wizard'],
             'sql'       => "varchar(10) NOT NULL default ''",
         ],
+        'addGetParamsToUrl' => [
+            'label'     => &$GLOBALS['TL_LANG']['tl_modal']['addGetParamsToUrl'],
+            'exclude'   => true,
+            'inputType' => 'text',
+            'eval'      => ['length' => 128, 'tl_class' => 'w50'],
+            'sql'       => "varchar(128) NOT NULL default ''",
+        ]
     ],
 ];
 

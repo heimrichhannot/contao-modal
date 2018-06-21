@@ -38,6 +38,10 @@ $arrLang['removeCloseButton'] = [
     'Schließen durch "Close" verhindern',
     'Aktivieren um das Schließen des Modul-Fenster durch drücken des "Close"-Buttons  zu unterbinden. (Diese Option entfernt den Button aus dem Template)'
 ];
+$arrLang['addGetParamsToUrl'] = [
+    'GET-Parameter anhängen',
+    'Ein komma-seperierte Liste von GET-Parametern der aktuellen (nicht Modal-) Url, welche der Modal-Url angehangen werden sollen. Beispielsweise, um eine ID mitzugeben.'
+];
 $arrLang['modal']        = ['Modal-Typ', 'Geben Sie den Standardtyp für die Darstellung von Modalfenster hier an.'];
 $arrLang['published']    = ['Veröffentlichen', 'Wählen Sie diese Option zum Veröffentlichen.'];
 $arrLang['start']        = ['Anzeigen ab', 'Modal erst ab diesem Tag auf der Webseite anzeigen.'];
@@ -53,6 +57,7 @@ $arrLang['header_legend']  = 'Kopfzeile';
 $arrLang['footer_legend']  = 'Fußzeile';
 $arrLang['expert_legend']  = 'Experten-Einstellungen';
 $arrLang['publish_legend'] = 'Veröffentlichung';
+$arrLang['url_legend'] = 'Modal-Url-Einstellung';
 
 
 /**

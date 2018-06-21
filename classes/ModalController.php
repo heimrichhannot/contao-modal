@@ -10,6 +10,7 @@
 
 namespace HeimrichHannot\Modal;
 
+use Contao\Input;
 use HeimrichHannot\Ajax\Ajax;
 use HeimrichHannot\Ajax\AjaxAction;
 use HeimrichHannot\Ajax\Response\Response404;
@@ -393,6 +394,23 @@ class ModalController extends \Controller
                 $blnAjax = false;
             }
         }
+
+        $paramsToKeep = explode(',',$arrRow['addGetParamsToUrl']);
+        $params = [];
+        if (!empty($paramsToKeep))
+        {
+            foreach ($paramsToKeep as $param)
+            {
+                if ($input = Input::get($param))
+                {
+                    $params[$param] = $input;
+                }
+            }
+            $strUrl = Url::addParametersToUri($strUrl, $params);
+        }
+
+
+
 
         // HOOK: add custom logic
         if (isset($GLOBALS['TL_HOOKS']['generateModalUrl']) && is_array($GLOBALS['TL_HOOKS']['generateModalUrl'])) {
