@@ -100,3 +100,10 @@ $GLOBALS['TL_MODALS']['bs3_sm'] = array_merge(
         'template' => 'modal_bs3_sm',
     ]
 );
+
+
+$GLOBALS['TL_COMPONENTS']['modal_bs3'] = [
+    'js'  => [
+        'system/modules/modal/assets/js/jquery.modal.bs3.min.js'
+    ]
+];
