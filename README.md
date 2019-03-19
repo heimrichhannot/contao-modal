@@ -1,7 +1,6 @@
 # Modal - A solid contao modal window framework
 
 Modal provides modal elements within modal archives. It works best together with *'heimrichhannot/contao-teaser'* and its teaser content elements.
-By default it comes with Bootstrap 3 modal support.
 
 ## Features
 
@@ -11,6 +10,14 @@ By default it comes with Bootstrap 3 modal support.
 - content elements within modal body
 - inserttags
 - works together with `contao-disclaimer`
+- Bootstrap 3 and 4 support
+- [Contao Components](https://github.com/heimrichhannot/contao-components) support
+
+## Setup 
+
+Install: `composer require heimrichhannot/contao-modal`
+
+We recommend to disable the not used modal framework component in page layout.
 
 ### Insertags
 

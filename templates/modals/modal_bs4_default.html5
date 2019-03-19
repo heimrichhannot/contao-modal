@@ -1,0 +1,38 @@
+<div class="bs-modal modal fade show" tabindex="-1" role="dialog" data-back="<?= $this->back; ?>" data-alias="<?= $this->alias; ?>"
+     <?php if ($this->staticBackdrop): ?>data-backdrop="static"<?php endif; ?>
+     <?php if ($this->disableKeyboard): ?>data-keyboard="false"<?php endif; ?>
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <?php if ($this->showHeader): ?>
+            <div class="modal-header">
+                <?php if ($this->customHeader): ?>
+                    <?= $this->header; ?>
+                <?php elseif ($this->headline): ?>
+                <?php if (!$this->removeCloseButton): ?>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <?php endif; ?>
+                <<?= $this->hl ?> class="modal-title"><?= $this->headline ?></<?= $this->hl ?>>
+        <?php elseif ($this->usePageTitle): ?>
+            <?php if (!$this->removeCloseButton): ?>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <?php endif; ?>
+            <h4 class="modal-title">{{page::pageTitle}}</h4>
+        <?php else: ?>
+            <?php if (!$this->removeCloseButton): ?>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <?php endif; ?>
+        <?php endif; ?>
+        </div>
+        <?php endif; ?>
+        <div class="modal-body">
+            <?= $this->body; ?>
+        </div>
+        <?php if ($this->showFooter): ?>
+            <div class="modal-footer">
+                <?= $this->footer; ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+</div>

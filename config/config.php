@@ -107,3 +107,38 @@ $GLOBALS['TL_COMPONENTS']['modal_bs3'] = [
         'system/modules/modal/assets/js/jquery.modal.bs3.min.js'
     ]
 ];
+
+$GLOBALS['TL_MODALS']['bs4_default'] = [
+    'header'   => true,
+    'footer'   => true,
+    'template' => 'modal_bs4_default',
+    'link'     => [
+        'attributes' => [
+            'data-toggle' => 'modal',
+        ],
+    ],
+    'js'       => [
+        'system/modules/modal/assets/js/jquery.modal.bs4.min.js',
+    ],
+];
+
+$GLOBALS['TL_MODALS']['bs4_lg'] = array_merge(
+    $GLOBALS['TL_MODALS']['bs4_default'],
+    [
+        'template' => 'modal_bs4_lg',
+    ]
+);
+
+$GLOBALS['TL_MODALS']['bs4_sm'] = array_merge(
+    $GLOBALS['TL_MODALS']['bs4_default'],
+    [
+        'template' => 'modal_bs4_sm',
+    ]
+);
+
+
+$GLOBALS['TL_COMPONENTS']['modal_bs4'] = [
+    'js'  => [
+        'system/modules/modal/assets/js/jquery.modal.bs4.min.js'
+    ]
+];
