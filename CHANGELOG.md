@@ -1,7 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [1.7.1] - 2019-04-20
+## [1.7.2] - 2019-04-02
+
+#### Fixed
+- do not redirect non ajax modal urls if modal already exists on current page (this will prevent to not show custom modals)
+
+## [1.7.1] - 2019-04-02
 
 #### Fixed
 - asset js handling improved (performance and redundancy)

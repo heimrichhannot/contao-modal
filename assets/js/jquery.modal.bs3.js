@@ -28,6 +28,13 @@
                     url = $el.attr('xlink:href');
                 }
 
+                var target = url || $el.data('target');
+
+                // do nothing if modal exists within current dom
+                if ($(target).length > 0) {
+                    return;
+                }
+
                 // redirect non ajax links
                 if (context != 'modal') {
                     window.location.href = url;
@@ -67,7 +74,7 @@
                                 }
                             }
                         }
-                    }
+                    },
                 });
 
                 return false;
@@ -101,7 +108,7 @@
             $(window).on('popstate', function() {
                 $('.bs-modal').modal('hide');
             });
-        }
+        },
     };
 
     $(function() {
