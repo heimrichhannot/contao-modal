@@ -395,21 +395,16 @@ class ModalController extends \Controller
             }
         }
 
-        $paramsToKeep = explode(',',$arrRow['addGetParamsToUrl']);
-        $params = [];
-        if (!empty($paramsToKeep))
-        {
-            foreach ($paramsToKeep as $param)
-            {
-                if ($input = Input::get($param))
-                {
+        $paramsToKeep = explode(',', $arrRow['addGetParamsToUrl']);
+        $params       = [];
+        if (!empty($paramsToKeep)) {
+            foreach ($paramsToKeep as $param) {
+                if ($input = Input::get($param)) {
                     $params[$param] = $input;
                 }
             }
             $strUrl = Url::addParametersToUri($strUrl, $params);
         }
-
-
 
 
         // HOOK: add custom logic
@@ -487,11 +482,18 @@ class ModalController extends \Controller
             }
 
             foreach ($arrConfig['js'] as $strFile) {
+                $key = standardize(str_replace('.min.js', '.js', $strFile));
+
+                if (isset($GLOBALS['TL_JAVASCRIPT'][$key])) {
+                    continue;
+                }
+
+
                 if (!file_exists(TL_ROOT . '/' . ltrim($strFile, '/'))) {
                     continue;
                 }
 
-                $GLOBALS['TL_JAVASCRIPT'][standardize($strFile)] = $strFile . '|static';
+                $GLOBALS['TL_JAVASCRIPT'][$key] = $strFile . '|static';
             }
 
 

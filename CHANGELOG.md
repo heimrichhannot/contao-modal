@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.7.1] - 2019-04-20
+
+#### Fixed
+- asset js handling improved (performance and redundancy)
+
 ## [1.7.0] - 2019-03-19
 
 #### Added
