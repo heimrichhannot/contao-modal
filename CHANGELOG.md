@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.7.3] - 2019-04-05
+
+#### Fixed
+- script modal issue
+
 ## [1.7.2] - 2019-04-02
 
 #### Fixed
