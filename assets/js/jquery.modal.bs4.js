@@ -92,9 +92,10 @@
                 // stop embedded videos like youtube
                 $this.find('iframe').each(function() {
                     var $this = $(this);
-
-                    // reset the src will stop the video
-                    $this.attr('src', $this.attr('src').replace('autoplay=1', 'autoplay=0'));
+                    if (typeof $this.attr('src') === 'string') {
+                        // reset the src will stop the video
+                        $this.attr('src', $this.attr('src').replace('autoplay=1', 'autoplay=0'));
+                    }
                 });
 
                 // stop embedded audio/video
