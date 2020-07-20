@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.7.5] - 2020-07-20
+- fixed webroot in ModalController for contao version > 4.x
+
 ## [1.7.4] - 2019-12-12
 - fixed model not closing when containing iframe hasn't src attribute
 

@@ -488,8 +488,12 @@ class ModalController extends \Controller
                     continue;
                 }
 
+                $webRoot = TL_ROOT;
+                if (version_compare(VERSION, '4.0', '>=')) {
+                    $webRoot .= '/web';
+                }
 
-                if (!file_exists(TL_ROOT . '/' . ltrim($strFile, '/'))) {
+                if (!file_exists($webRoot . '/' . ltrim($strFile, '/'))) {
                     continue;
                 }
 
