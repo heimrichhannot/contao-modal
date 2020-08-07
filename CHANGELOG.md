@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.8.0] - 2020-08-07
+- added new ajax event after the modal has been rendered `modalAjaxComplete`
+
 ## [1.7.5] - 2020-07-20
 - fixed webroot in ModalController for contao version > 4.x
 
