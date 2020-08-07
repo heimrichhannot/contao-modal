@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.8.1] - 2020-08-07
+- fixed `modalAjaxComplete` (now called from document)
+
 ## [1.8.0] - 2020-08-07
 - added new ajax event after the modal has been rendered `modalAjaxComplete`
 

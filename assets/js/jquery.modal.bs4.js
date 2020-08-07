@@ -73,7 +73,7 @@
                             var $modal = $('.bs-modal');
                             $modal.modal('show');
 
-                            $modal.dispatchEvent(new CustomEvent('modalAjaxComplete', {detail: $modal, bubbles: true, cancelable: true}));
+                            document.dispatchEvent(new CustomEvent('modalAjaxComplete', {detail: $modal, bubbles: true, cancelable: true}));
 
                             if (typeof response.result.data.url !== 'undefined') {
                                 if (window.history && window.history.pushState) {
