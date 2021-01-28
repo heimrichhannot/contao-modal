@@ -179,18 +179,27 @@ class ModalController extends \Controller
     public function setModalAutoItem($objPage, $objLayout, &$objPageRegular)
     {
         // Set the item from the auto_item parameter
+        // IMPORTANT: Don't run \Input::get('auto_item') without keeping it in \Input::$arrUnusedGet which
+        // leads wrong auto_items being accepted (non-404) in regular pages!!
         if (!isset($_GET['modals']) && \Config::get('useAutoItem') && isset($_GET['auto_item'])) {
-            \Input::setGet('modals', \Input::get('auto_item'));
+            \Input::setGet('modals', \Input::get('auto_item', false, true));
         }
 
         $blnForwardAutoItem = false;
         $objModal           = ModalModel::findPublishedByIdOrAliasWithoutLinkedPage(\Input::get('modals'));
+
+        if ($objModal !== null) {
+            // force auto_item to be removed from \Input::$arrUnusedGet
+            \Input::get('auto_item');
+        }
 
         if ($objModal === null && $objPage->linkModal) {
             $objModal = ModalModel::findPublishedByIdOrAlias($objPage->modal);
 
             // only forward auto item if modal is found and auto_item not same as modal alias (otherwise for example ModuleNewsReader will generate 404)
             if ($objModal !== null) {
+                // force auto_item to be removed from \Input::$arrUnusedGet
+                \Input::get('auto_item');
 
                 $blnForwardAutoItem = true;
 
