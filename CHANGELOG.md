@@ -1,5 +1,10 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
+
+## [1.9.0] - 2021-09-01
+
+- Added: php8 support
 
 ## [1.8.2] - 2021-01-28
 - fixed ModalController -> Don't run \Input::get('auto_item') without keeping it in \Input::$arrUnusedGet which leads wrong auto_items being accepted (non-404) in regular pages!!
