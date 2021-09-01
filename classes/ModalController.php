@@ -143,7 +143,7 @@ class ModalController extends \Controller
      *
      * @return mixed|string
      */
-    public function getDefaultModalType($blnReference = false)
+    public static function getDefaultModalType($blnReference = false)
     {
         $strReturn = '';
         $arrModals = static::getModalTypes();
@@ -167,7 +167,7 @@ class ModalController extends \Controller
      *
      * @return array List of modal types
      */
-    public function getModalTypes()
+    public static function getModalTypes()
     {
         if (!is_array($GLOBALS['TL_MODALS'])) {
             return [];
