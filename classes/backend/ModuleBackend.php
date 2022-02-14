@@ -28,7 +28,7 @@ class ModuleBackend extends \Backend
 
         foreach ($arrModules as $strModule => $arrConfig)
         {
-            if (!is_array($arrConfig))
+            if (!is_array($arrConfig) || !isset($arrDca['palettes'][$strModule]))
             {
                 continue;
             }
