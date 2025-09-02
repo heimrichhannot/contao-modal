@@ -1,5 +1,7 @@
 # Modal - A solid contao modal window framework
 
+> This package is abandoned and no longer maintained.
+
 Modal provides modal elements within modal archives. It works best together with *'heimrichhannot/contao-teaser'* and its teaser content elements.
 
 ## Features
